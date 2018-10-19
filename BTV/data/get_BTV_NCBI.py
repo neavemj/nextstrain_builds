@@ -70,7 +70,7 @@ with open("AUS_BTV_ISOLATES.txt") as f:
         virus = cols[1].strip()
         type = cols[2].strip()
         state = cols[3].strip()
-        date = cols[4].strip()
+        date = cols[4].strip() + "-01-01"
         # get record for each segment
         # should be 10 segments
         for index, segment_id in enumerate(cols[5:]):

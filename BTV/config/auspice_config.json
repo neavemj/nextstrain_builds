@@ -1,0 +1,50 @@
+{
+  "title": "BTV in Australia",
+  "color_options": {
+    "num_date": {
+      "menuItem": "date",
+      "legendTitle": "Sampling date",
+      "type": "continuous",
+      "key": "num_date"
+    },
+    "authors": {
+      "key":"authors",
+      "legendTitle":"Authors",
+      "menuItem":"authors",
+      "type":"discrete"
+    },
+    "type": {
+      "key":"type",
+      "legendTitle":"type",
+      "menuItem":"type",
+      "type":"discrete"
+    },
+    "host": {
+      "key":"host",
+      "legendTitle":"host",
+      "menuItem":"host",
+      "type":"discrete"
+    },
+    "state": {
+      "key":"state",
+      "legendTitle":"state",
+      "menuItem":"state",
+      "type":"discrete"
+    }
+  },
+  "geo": [
+    "state"
+  ],
+  "defaults": {
+    "mapTriplicate": true
+  },  
+  "maintainer": [
+    "Matthew Neave",
+    "mailto:matthew.neave@csiro.au"
+  ],
+  "filters": [
+    "state",
+    "host",
+    "authors"
+  ]
+}
