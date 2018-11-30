@@ -5,7 +5,7 @@
       "menuItem": "date",
       "legendTitle": "Sampling date",
       "type": "continuous",
-      "key": "num_date"
+      "key": "date"
     },
     "authors": {
       "key":"authors",
