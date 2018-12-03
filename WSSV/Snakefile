@@ -1,0 +1,9 @@
+
+# can use expand for different alignments (gaps with Ns or not)
+
+ALIGNMENT = ["1", "2"]
+
+rule all:
+    input:
+        auspice_tree = expand("auspice/wssv_align{alignment}_tree.json", alignment=ALIGNMENT),
+        auspice_meta = expand("auspice/wssv_align{alignment}_meta.json", alignment=ALIGNMENT)
