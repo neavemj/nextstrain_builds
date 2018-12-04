@@ -1,0 +1,65 @@
+{
+  "title": "Tracking WSSV evolution",
+  "color_options": {
+    "num_date": {
+      "menuItem": "date",
+      "legendTitle": "Sampling date",
+      "type": "continuous",
+      "key": "date"
+    },
+    "country": {
+      "key":"country",
+      "legendTitle":"Country",
+      "menuItem":"country",
+      "type":"discrete"
+    },
+    "type": {
+      "key":"source",
+      "legendTitle":"Source",
+      "menuItem":"source",
+      "type":"discrete"
+    },
+    "host": {
+      "key":"host",
+      "legendTitle":"Host",
+      "menuItem":"host",
+      "type":"discrete"
+    },
+    "specimen": {
+      "key":"specimen",
+      "legendTitle":"Specimen",
+      "menuItem":"specimen",
+      "type":"discrete"
+    },
+    "host": {
+      "key":"platform",
+      "legendTitle":"Sequencing Platform",
+      "menuItem":"platform",
+      "type":"discrete"
+    },
+    "state": {
+      "key":"state",
+      "legendTitle":"state",
+      "menuItem":"state",
+      "type":"discrete"
+    }
+  },
+  "geo": [
+    "country"
+  ],
+  "defaults": {
+    "mapTriplicate": true
+  },  
+  "maintainer": [
+    "Matthew Neave",
+    "mailto:matthew.neave@csiro.au"
+  ],
+  "filters": [
+    "state",
+    "country",
+    "host",
+    "source",
+    "platform",
+    "specimen"
+  ]
+}
