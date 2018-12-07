@@ -1,10 +1,21 @@
 
-# could add alignment numbers here to check differences
+ANALYSES = ["fillgaps", "gblocks"]
 
 rule all:
     input:
-        auspice_tree = "auspice/wssv_tree.json",
-        auspice_meta = "auspice/wssv_meta.json"
+        auspice_tree = expand("auspice/wssv_{analysis}_tree.json", analysis=ANALYSES),
+        auspice_meta = expand("auspice/wssv_{analysis}_meta.json", analysis=ANALYSES)
+
+rule files:
+    params:
+        input_fasta = "data/wssv_{analysis}.fasta",
+        input_meta = "data/wssv_{analysis}.meta.tsv",
+        dropped_strains = "",
+        reference = "config/whitespot_AF369029.2.gb",
+        #colors = "config/colors.tsv",
+        auspice_config = "config/auspice_config.json"
+
+files = rules.files.params
 
 rule filter:
     message:
@@ -12,16 +23,16 @@ rule filter:
         Filtering to sequences
         """
     input:
-        sequences = "data/wssv_genomes_03122018.fasta",
-        metadata = "data/wssv_meta.tsv"
+        sequences = files.input_fasta,
+        metadata = files.input_meta
     output:
-        sequences = "results/filtered.fasta"
+        sequences = "results/filtered_{analysis}.fasta"
     shell:
         """
         augur filter \
             --sequences {input.sequences} \
             --metadata {input.metadata} \
-            --output {output.sequences} \
+            --output {output.sequences}
         """
 
 rule align:
@@ -32,27 +43,53 @@ rule align:
         """
     input:
         sequences = rules.filter.output.sequences,
-        reference = "config/whitespot_AF369029.2.gb"
+        reference = files.reference
     output:
-        alignment = "results/aligned.fasta"
-    params:
-        nthreads = 16
+        alignment = "results/aligned_{analysis}.fasta"
+    threads: 16
     shell:
         """
         augur align \
             --sequences {input.sequences} \
             --reference-sequence {input.reference} \
             --output {output.alignment} \
-            --nthreads {params.nthreads} \
+            --nthreads {threads} \
             --fill-gaps
         """
+
+rule gblocks:
+    message:
+        """
+        calculating well-aligned regions with gblocks
+        """
+    input:
+        raw_alignment = rules.align.output.alignment
+    output:
+        gblocks_alignment = "results/aligned_{analysis}.fasta-gb"
+    shell:
+        """
+        gblocks \
+            {input.raw_alignment} \
+            -t=d
+        """
+
+def align_option(wildcards):
+    print("function called")
+    if wildcards.analysis == "gblocks":
+        print("gblocks running")
+        return(rules.gblocks.output.gblocks_alignment)
+    else:
+        print("else statement running")
+        return(rules.align.output.alignment)
+
 
 rule tree:
     message: "Building tree"
     input:
-        alignment = rules.align.output.alignment
+        #alignment = rules.align.output.alignment
+        alignment = align_option
     output:
-        tree = "results/tree_raw.nwk"
+        tree = "results/tree_raw_{analysis}.nwk"
     params:
         method = "iqtree"
     shell:
@@ -73,11 +110,11 @@ rule refine:
         """
     input:
         tree = rules.tree.output.tree,
-        alignment = rules.align.output,
-        metadata = "data/wssv_meta.tsv"
+        alignment = align_option,
+        metadata = files.input_meta
     output:
-        tree = "results/tree.nwk",
-        node_data = "results/branch_lengths.json"
+        tree = "results/tree_{analysis}.nwk",
+        node_data = "results/branch_lengths_{analysis}.json"
     params:
         coalescent = "opt",
         date_inference = "marginal"
@@ -100,9 +137,9 @@ rule ancestral:
     message: "Reconstructing ancestral sequences and mutations"
     input:
         tree = rules.refine.output.tree,
-        alignment = rules.align.output
+        alignment = align_option
     output:
-        node_data = "results/nt_muts.json"
+        node_data = "results/nt_muts_{analysis}.json"
     params:
         inference = "joint"
     shell:
@@ -119,9 +156,9 @@ rule translate:
     input:
         tree = rules.refine.output.tree,
         node_data = rules.ancestral.output.node_data,
-        reference = "config/whitespot_AF369029.2.gb"
+        reference = files.reference
     output:
-        node_data = "results/aa_muts.json"
+        node_data = "results/aa_muts_{analysis}.json"
     shell:
         """
         augur translate \
@@ -135,11 +172,11 @@ rule traits:
     message: "Inferring ancestral traits for {params.columns!s}"
     input:
         tree = rules.refine.output.tree,
-        metadata = "data/wssv_meta.tsv"
+        metadata = files.input_meta
     output:
-        node_data = "results/traits.json"
+        node_data = "results/traits_{analysis}.json"
     params:
-        columns = "state"
+        columns = "country"
     shell:
         """
         augur traits \
@@ -154,15 +191,16 @@ rule export:
     message: "Exporting data files for for auspice"
     input:
         tree = rules.refine.output.tree,
-        metadata = "data/wssv_meta.tsv",
+        metadata = files.input_meta,
         branch_lengths = rules.refine.output.node_data,
         traits = rules.traits.output.node_data,
         nt_muts = rules.ancestral.output.node_data,
         aa_muts = rules.translate.output.node_data,
-        auspice_config = "config/auspice_config.json"
+        auspice_config = files.auspice_config,
+        lat_longs = "data/lat_longs_aus.tsv"
     output:
-        auspice_tree = "auspice/wssv_tree.json",
-        auspice_meta = "auspice/wssv_meta.json"
+        auspice_tree = "auspice/wssv_{analysis}_tree.json",
+        auspice_meta = "auspice/wssv_{analysis}_meta.json"
     shell:
         """
         augur export \
@@ -170,6 +208,7 @@ rule export:
             --metadata {input.metadata} \
             --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
             --auspice-config {input.auspice_config} \
+            --lat-longs {input.lat_longs} \
             --output-tree {output.auspice_tree} \
             --output-meta {output.auspice_meta}
         """

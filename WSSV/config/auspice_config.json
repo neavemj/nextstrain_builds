@@ -13,7 +13,7 @@
       "menuItem":"country",
       "type":"discrete"
     },
-    "type": {
+    "source": {
       "key":"source",
       "legendTitle":"Source",
       "menuItem":"source",
@@ -31,7 +31,7 @@
       "menuItem":"specimen",
       "type":"discrete"
     },
-    "host": {
+    "platform": {
       "key":"platform",
       "legendTitle":"Sequencing Platform",
       "menuItem":"platform",
