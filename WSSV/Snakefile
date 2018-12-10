@@ -1,5 +1,5 @@
 
-ANALYSES = ["fillgaps", "gblocks"]
+ANALYSES = ["gaps", "fillgaps", "gblocks"]
 
 rule all:
     input:
@@ -47,17 +47,16 @@ rule align:
     output:
         alignment = "results/aligned_{analysis}.fasta"
     threads: 16
-    shell:
-        """
-        augur align \
-            --sequences {input.sequences} \
-            --reference-sequence {input.reference} \
-            --output {output.alignment} \
-            --nthreads {threads} \
-            --fill-gaps
-        """
+    run:
+        if wildcards.analysis == "gaps":
+            shell("augur align --sequences {input.sequences} --reference-sequence {input.reference} --output {output.alignment} --nthreads {threads}")
+        else:
+            shell("augur align --sequences {input.sequences} --reference-sequence {input.reference} --output {output.alignment} --nthreads {threads} --fill-gaps")
+
 
 rule gblocks:
+    # the || true bit is because gblocks exits with an error (even if it has worked correctly)
+    # no idea why, but that code 'tricks' snakemake into thinking it worked
     message:
         """
         calculating well-aligned regions with gblocks
@@ -70,7 +69,8 @@ rule gblocks:
         """
         gblocks \
             {input.raw_alignment} \
-            -t=d
+            -t=d \
+            || true
         """
 
 def align_option(wildcards):
