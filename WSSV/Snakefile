@@ -67,7 +67,7 @@ rule gblocks:
         gblocks_alignment = "results/aligned_{analysis}.fasta-gb"
     shell:
         """
-        gblocks \
+        Gblocks \
             {input.raw_alignment} \
             -t=d \
             || true
