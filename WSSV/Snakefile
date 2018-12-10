@@ -49,9 +49,9 @@ rule align:
     threads: 16
     run:
         if wildcards.analysis == "gaps":
-            shell("augur align --sequences {input.sequences} --reference-sequence {input.reference} --output {output.alignment} --nthreads {threads}")
+            shell("augur align --sequences {input.sequences} --reference-sequence {input.reference} --remove-reference --output {output.alignment} --nthreads {threads}")
         else:
-            shell("augur align --sequences {input.sequences} --reference-sequence {input.reference} --output {output.alignment} --nthreads {threads} --fill-gaps")
+            shell("augur align --sequences {input.sequences} --reference-sequence {input.reference} --remove-reference --output {output.alignment} --nthreads {threads} --fill-gaps")
 
 
 rule gblocks:
@@ -74,12 +74,9 @@ rule gblocks:
         """
 
 def align_option(wildcards):
-    print("function called")
     if wildcards.analysis == "gblocks":
-        print("gblocks running")
         return(rules.gblocks.output.gblocks_alignment)
     else:
-        print("else statement running")
         return(rules.align.output.alignment)
 
 
