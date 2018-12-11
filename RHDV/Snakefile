@@ -2,8 +2,8 @@ SEGMENTS = ["S", "NS"]
 
 rule all:
     input:
-        auspice_tree = expand("auspice/btv_segment{segment}_tree.json", segment=SEGMENTS),
-        auspice_meta = expand("auspice/btv_segment{segment}_meta.json", segment=SEGMENTS)
+        auspice_tree = expand("auspice/RHDV_{variant}_{segment}.fasta", segment=SEGMENTS),
+        auspice_meta = expand("auspice/RHDV_{variant}_{segment}_meta.json", segment=SEGMENTS)
 
 
 rule filter:
