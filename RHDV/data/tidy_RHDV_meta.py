@@ -33,6 +33,7 @@ for f in [RHDV1_meta, RHDV2_meta, RCV_meta]:
 # want a accession to strain dict for the fasta writing
 
 acc_to_strain = {}
+strain_to_variant = {}
 strain_list = []
 
 with open(meta_file) as f:
@@ -40,25 +41,26 @@ with open(meta_file) as f:
     for line in f:
         line = line.strip()
         cols = line.split("\t")
-        strain = cols[0]
+        strain = cols[0].strip()
         strain_list.append(strain)
         strain_short = cols[1]
-        acc = cols[3]
-        variant_long = cols[4]
+        acc = cols[3].strip()
+        variant_long = cols[4].strip()
         variant = variant_convert[variant_long]
+        strain_to_variant[strain] = variant
         date = cols[5]
         country = cols[6]
         state = cols[7]
         authors = cols[8]
         title = cols[9]
         host = cols[10]
-        # some of the CBAlgarve14 and CBMert strains are missing this column
-        try:
-            ngs_plate = cols[11]
-        except:
-            ngs_plate = "na"
+        lat = cols[11]
+        long = cols[12]
+        lat_long = lat + " " + long
+
         acc_to_strain[acc] = strain
-        meta_list = [strain, strain_short, acc, variant_long, variant, date, country, state, authors, title, host]
+        meta_list = [strain, strain_short, acc, variant_long, variant, date, country, state, authors, title, host,
+                     lat_long]
         meta_list = [item.strip() for item in meta_list]
         if variant == "RHDV1":
             RHDV1_meta.write("\t".join(meta_list) + "\n")
@@ -73,10 +75,52 @@ with open(meta_file) as f:
 
 count = 0
 
+def check_header(header):
+
+    # sometimes the header in the fasta file contains an additional 2 digits at the end
+    header_sub = "/".join(header.split("/")[:-1])
+
+    # a couple of the strains have the accession number / strain
+    possible_acc = header.split("/")[0]
+
+    # some of the 'short' strain names have case differences
+    header_upper = header_sub.upper()
+
+    if header_sub in strain_list:
+        return(header_sub)
+
+    # check if the header is an NCBI accession
+    elif header in acc_to_strain:
+        return(acc_to_strain[header])
+
+    # a couple of the strains have the accession number / strain
+    elif possible_acc in acc_to_strain:
+        return(acc_to_strain[possible_acc])
+
+    elif header_upper in strain_list:
+        return(header_upper)
+
+    else:
+        print("could not find header: {}, {}".format(header, header_sub))
+        return("not found")
+
+
 with open(fasta_file) as f:
     for record in SeqIO.parse(f, "fasta"):
-        strain = record.id.lstrip("O.cun*/")
-        if strain not in strain_list:
-            count += 1
-            print(strain)
-    print(count)
+        header = record.id.lstrip("O.cun*/").lstrip("L.eur*/").split(" ")[0]
+        proper_header = check_header(header)
+        record.id = proper_header
+        record.description = proper_header
+        # apparently biopython has a module for turning U back to T
+        record.seq = record.seq.back_transcribe()
+        variant = strain_to_variant[proper_header]
+        if variant == "RHDV1":
+            SeqIO.write(record, RHDV1_fasta, "fasta")
+        elif variant == "RHDV2":
+            SeqIO.write(record, RHDV2_fasta, "fasta")
+        elif variant == "RCV":
+            SeqIO.write(record, RCV_fasta, "fasta")
+        else:
+            print("warning unknown variant in fasta file: {}".format(variant))
+
+
