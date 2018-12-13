@@ -11,7 +11,7 @@ rule files:
         input_fasta = "data/RHDV_{variant}_{segment}.fasta",
         input_meta = "data/RHDV_{variant}_{segment}.meta.tsv",
         dropped_strains = "",
-        reference = "config/RHDV_{variant}_{segment}.gb",
+        reference = "config/NC_001543.gb",
         #colors = "config/colors.tsv",
         auspice_config = "config/auspice_config.json"
 
@@ -99,6 +99,7 @@ rule refine:
             --output-node-data {output.node_data} \
             --timetree \
             --coalescent {params.coalescent} \
+            --date-format %d/%m/%Y \
             --date-confidence \
             --date-inference {params.date_inference}
         """
@@ -166,7 +167,6 @@ rule export:
         traits = rules.traits.output.node_data,
         nt_muts = rules.ancestral.output.node_data,
         aa_muts = rules.translate.output.node_data,
-        colors = "config/colors.tsv",
         lat_longs = "data/aus_state_lat_longs.tsv",
         auspice_config = "config/auspice_config.json"
     output:
@@ -179,7 +179,6 @@ rule export:
             --metadata {input.metadata} \
             --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
             --auspice-config {input.auspice_config} \
-            --colors {input.colors} \
             --lat-longs {input.lat_longs} \
             --output-tree {output.auspice_tree} \
             --output-meta {output.auspice_meta}
