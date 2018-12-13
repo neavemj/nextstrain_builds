@@ -21,6 +21,7 @@
     }
   },
   "geo": [
+    "isolate",
     "state"
   ],
   "defaults": {

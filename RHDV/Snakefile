@@ -168,7 +168,7 @@ rule export:
         traits = rules.traits.output.node_data,
         nt_muts = rules.ancestral.output.node_data,
         aa_muts = rules.translate.output.node_data,
-        lat_longs = "data/aus_state_lat_longs.tsv",
+        lat_longs = "data/isolate_state_lat_longs.tsv",
         auspice_config = "config/auspice_config.json"
     output:
         auspice_tree = "auspice/RHDV_{variant}_{segment}_tree.json",
