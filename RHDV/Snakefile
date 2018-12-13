@@ -11,7 +11,7 @@ rule files:
         input_fasta = "data/RHDV_{variant}_{segment}.fasta",
         input_meta = "data/RHDV_{variant}_{segment}.meta.tsv",
         dropped_strains = "",
-        reference = "config/NC_001543.gb",
+        reference = "config/KT280060_{segment}.gb",
         #colors = "config/colors.tsv",
         auspice_config = "config/auspice_config.json"
 
