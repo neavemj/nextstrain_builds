@@ -37,7 +37,7 @@ if meta_file.rstrip(".txt").endswith("_S"):
 
 for f in [RHDV1_meta, RHDV2_meta, RCV_meta]:
     f.write("\t".join(["strain", "strain_short", "accession", "variant_long", "variant", "date", "country", "state", "authors",
-                       "title", "host"]) + "\n")
+                       "title", "host", "lat_long"]) + "\n")
 
 # want a accession to strain dict for the fasta writing
 
@@ -45,7 +45,7 @@ acc_to_strain = {}
 strain_to_variant = {}
 strain_list = []
 
-with open(meta_file) as f:
+with open(meta_file, encoding="cp1252") as f:
     next(f)
     for line in f:
         line = line.strip()
@@ -64,7 +64,10 @@ with open(meta_file) as f:
         title = cols[9]
         host = cols[10]
         lat = cols[11]
-        long = cols[12]
+        try:
+            long = cols[12]
+        except:
+            print(cols)
         lat_long = lat + " " + long
 
         acc_to_strain[acc] = strain
@@ -81,8 +84,6 @@ with open(meta_file) as f:
             print("warning unknown variant in meta file: {}".format(variant))
 
 # now go through the fasta file and split into variants with correct strain names
-
-count = 0
 
 def check_header(header):
 

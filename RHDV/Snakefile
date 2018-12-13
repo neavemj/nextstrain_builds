@@ -1,5 +1,5 @@
-VARIANTS = ["RHDV1", "RHDV2", "RCV"]
-SEGMENTS = ["S", "NS"]
+VARIANTS = ["RHDV2"]
+SEGMENTS = ["NS"]
 
 rule all:
     input:
@@ -12,6 +12,7 @@ rule files:
         input_meta = "data/RHDV_{variant}_{segment}.meta.tsv",
         dropped_strains = "",
         reference = "config/KT280060_{segment}.gb",
+        #reference = "config/KT280060.gb",
         #colors = "config/colors.tsv",
         auspice_config = "config/auspice_config.json"
 
@@ -148,7 +149,7 @@ rule traits:
     output:
         node_data = "results/traits_{variant}_{segment}.json"
     params:
-        columns = "state"
+        columns = "strain state"
     shell:
         """
         augur traits \

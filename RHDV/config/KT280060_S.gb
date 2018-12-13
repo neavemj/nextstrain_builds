@@ -8,6 +8,16 @@ SOURCE      .
   ORGANISM  .
             .
 FEATURES             Location/Qualifiers
+     source          1..2108
+                     /organism="Rabbit hemorrhagic disease virus"
+                     /mol_type="genomic RNA"
+                     /isolate="BLMT-1"
+                     /isolation_source="liver"
+                     /host="Wild"
+                     /db_xref="taxon:11976"
+                     /country="Australia"
+                     /collection_date="13-May-2015"
+                     /note="genotype: G1/RHDVb recombinant"
      CDS             <1..1740
                      /gene="VP60 capsid"
                      /note="ORF1"
