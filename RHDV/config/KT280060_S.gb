@@ -1,0 +1,74 @@
+LOCUS       KT280060                2108 bp    DNA              UNK 01-JAN-1980
+DEFINITION  Rabbit hemorrhagic disease virus isolate BLMT-1 polyprotein gene,
+            partial cds; and minor structural protein gene, complete cds.
+ACCESSION   KT280060
+VERSION     KT280060.1
+KEYWORDS    .
+SOURCE      .
+  ORGANISM  .
+            .
+FEATURES             Location/Qualifiers
+     CDS             <1..1740
+                     /gene="VP60 capsid"
+                     /note="ORF1"
+                     /codon_start=1
+                     /product="VP60 capsid"
+                     /protein_id="ALY05348.1"
+                     /translation="MEGKARAAPQGETAGTATTASVPGTTTDGMDPGVVATTSVVTTEN
+                     ASTSIATAGIGGPPQQVDQQETWRTNFYYNDVFTWSVADAPGNILYTVQHSPQNNPFTA
+                     VLSQMYAGWAGGMQFRFIVAGSGVFGGRLVAAVIPPGIEIGPGLEVRQFPHVVIDARSL
+                     EPVTITMPDLRPNMYHPTGNPGLVPTLVLSVYNNLINPFGGSTSAIQVTVETRPSEDFE
+                     FVMIRAPSSKTVDSISPADLLTTPVLTGVGTDNRWNGEIVGLQPVPGGFSTCNRHWNLN
+                     GSTFGWSSPRFAAIDHDRGNASFPGSSSSNVLELWYASAGSAADNPISQIAPDGFPDMS
+                     FVPFSGTTVPTAGWVGFGGIWNSSNGAPFVTTMQAYELGFATGVPSNPQPTTTTSGAQI
+                     VAKSIYGVANGINQTTAGLFVMASGVISTPNSSAITYTPQPNRIVNAPGTPAAAPIGKN
+                     TPIMFASVVRRTGDINAEAGSTNGTQYGAGSQPLPVTVGLSLNNYSSALVPGQFFVWQL
+                     NFASGFMELGLSVDGYFYAGTGASTTLIDLSELVDIRPVGPRPSTSTLVYNLGGTTNGF
+                     SYV"
+     CDS             1733..2074
+                     /gene="VP10"
+                     /note="ORF2"
+                     /codon_start=1
+                     /product="minor structural protein"
+                     /protein_id="ALY05349.1"
+                     /translation="MSEFVGLGLAGASVLSSALLRRQELQLQKQALENGLVLKANQLSR
+                     LGFNPNEVKSMIVGSNFSGNVKLSNMHNDASVVSAYSMYNPASNGIRKKIKSFNDSVKV
+                     YNTTGESSA"
+ORIGIN
+        1 atggagggca aagcccgcgc ggcgccgcaa ggcgagacag cgggcactgc taccacagca
+       61 tcggtccctg gaaccacaac cgacggtatg gaccctggtg ttgtggccac tactagtgtg
+      121 gtcaccaccg agaacgcgtc cacgtcgatt gcaacggcgg ggattggcgg tccaccccaa
+      181 caagtggacc aacaagaaac ttggaggaca aacttttact acaatgatgt tttcacatgg
+      241 tcagttgcag acgccccggg caacatcctg tacactgtcc aacactcgcc acaaaacaac
+      301 ccgttcacag ctgttctaag tcaaatgtac gctggctggg ccggtggcat gcaattccgg
+      361 tttatagtcg ctgggtcagg tgtcttcggt gggcgtctgg ttgcagcggt tataccaccg
+      421 ggcattgaga ttgggccagg tttggaagtc agacaattcc ctcatgttgt cattgacgct
+      481 cgttcactcg aaccagtcac catcaccatg ccggacctgc gtcctaacat gtaccacccg
+      541 acaggcaacc ctggcctcgt ccccacgttg gtcctgagcg tttacaacaa cctcatcaat
+      601 ccatttggtg gatccacgag cgcgatccag gtcacggtgg aaacaaggcc cagtgaggac
+      661 tttgagtttg tgatgatccg tgccccatcc agtaagaccg ttgattcgat ctcgcccgct
+      721 gatctcctca caaccccggt cctcactggg gttggtaccg acaacagatg gaatggtgag
+      781 atagttgggc tgcagccagt ccccggtggg ttctctacgt gcaacagaca ctggaactta
+      841 aatggtagca cgtttggatg gtcaagcccg cggtttgccg ccattgacca cgacagaggc
+      901 aacgcaagtt tccctggaag cagttcgtca aatgtgcttg agctttggta tgctagtgcc
+      961 gggtctgcag ctgacaaccc catctcccaa attgctccag atggtttccc tgacatgtca
+     1021 tttgtgccct tcagcggcac caccgtccct accgcagggt gggtcgggtt cggtgggatc
+     1081 tggaacagca gtaatggtgc ccccttcgtc acgaccatgc aggcttatga gttgggcttt
+     1141 gccactggag taccgagcaa ccctcaaccc accaccacca cttcaggggc tcagattgtt
+     1201 gccaagtcca tctatggcgt tgcaaatggc ataaaccaga caacagccgg gttgtttgtg
+     1261 atggcatcgg gtgtcatatc caccccaaac agtagtgcca ttacgtacac acctcagcca
+     1321 aacaggattg tcaatgcacc tggcacccct gctgccgctc ctattggcaa gaacacaccc
+     1381 atcatgttcg cgtctgttgt taggcgcacc ggcgacatca acgctgaggc cggttcaact
+     1441 aacggaaccc agtacggcgc gggatcacag ccactgccgg tgacagttgg actttcactg
+     1501 aacaattact catcggcact tgtgcctggg caattttttg tttggcagct gaacttcgct
+     1561 tccggcttca tggaacttgg cttgagtgtt gatggatact tctatgcggg gacaggggct
+     1621 tcaaccaccc tcattgatct gtcagaactt gttgacatcc gccctgtggg acccagaccg
+     1681 tccacaagca cgctcgtgta caacctgggg ggcacaacca atggcttttc ttatgtctga
+     1741 atttgttgga cttggacttg caggtgccag cgttttgagc agtgctctgc tccgcaggca
+     1801 ggagttgcaa ctacaaaaac aagctttaga aaatgggttg gttttaaagg ccaatcagtt
+     1861 gagtagatta ggttttaacc ctaatgaagt taagagcatg attgtaggta gtaattttag
+     1921 tggcaatgtt aagttaagta atatgcataa tgatgctagt gtagttagtg cttatagtat
+     1981 gtataaccct gccagtaatg gcattaggaa gaaaattaaa agctttaatg atagtgttaa
+     2041 ggtttataat accactggcg aatccagtgc ttgattagaa ttggattaaa tttaattggt
+     2101 ttagtttg
+//
