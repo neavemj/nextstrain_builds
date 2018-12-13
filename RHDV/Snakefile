@@ -51,6 +51,7 @@ rule align:
         augur align \
             --sequences {input.sequences} \
             --reference-sequence {input.reference} \
+            --remove-reference \
             --output {output.alignment} \
             --fill-gaps
         """
