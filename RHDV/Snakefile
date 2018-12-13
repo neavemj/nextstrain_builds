@@ -12,7 +12,6 @@ rule files:
         input_meta = "data/RHDV_{variant}_{segment}.meta.tsv",
         dropped_strains = "",
         reference = "config/KT280060_{segment}.gb",
-        #reference = "config/KT280060.gb",
         #colors = "config/colors.tsv",
         auspice_config = "config/auspice_config.json"
 
@@ -149,7 +148,7 @@ rule traits:
     output:
         node_data = "results/traits_{variant}_{segment}.json"
     params:
-        columns = "strain state"
+        columns = "place state"
     shell:
         """
         augur traits \
@@ -169,7 +168,7 @@ rule export:
         traits = rules.traits.output.node_data,
         nt_muts = rules.ancestral.output.node_data,
         aa_muts = rules.translate.output.node_data,
-        lat_longs = "data/isolate_state_lat_longs.tsv",
+        lat_longs = "data/place_lat_longs.tsv",
         auspice_config = "config/auspice_config.json"
     output:
         auspice_tree = "auspice/RHDV_{variant}_{segment}_tree.json",

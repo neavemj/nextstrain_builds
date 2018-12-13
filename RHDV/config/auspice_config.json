@@ -21,7 +21,7 @@
     }
   },
   "geo": [
-    "strain",
+    "place",
     "state"
   ],
   "defaults": {
