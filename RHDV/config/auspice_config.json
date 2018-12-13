@@ -1,0 +1,38 @@
+{
+  "title": "RHDV in Australia",
+  "color_options": {
+    "num_date": {
+      "menuItem": "date",
+      "legendTitle": "Sampling date",
+      "type": "continuous",
+      "key": "date"
+    },
+    "type": {
+      "key":"state",
+      "legendTitle":"State",
+      "menuItem":"state",
+      "type":"discrete"
+    },
+    "host": {
+      "key":"host",
+      "legendTitle":"Host",
+      "menuItem":"host",
+      "type":"discrete"
+    },
+  },
+  "geo": [
+    "state"
+  ],
+  "defaults": {
+    "mapTriplicate": true
+  },
+  "maintainer": [
+    "Matthew Neave",
+    "mailto:matthew.neave@csiro.au"
+  ],
+  "filters": [
+    "state",
+    "host",
+    "authors"
+  ]
+}

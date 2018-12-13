@@ -19,13 +19,21 @@ variant_convert = {"GI.1a": "RHDV1", "GI.1c": "RHDV1", "GI.4eP_GI.1a": "RHDV1", 
 
 # need to write meta data separately for each variant
 
-if meta_file.rstrip(".txt").endswith("NS"):
+if meta_file.rstrip(".txt").endswith("_NS"):
     RHDV1_fasta = open("RHDV_RHDV1_NS.fasta", "w")
     RHDV1_meta = open("RHDV_RHDV1_NS.meta.tsv", "w")
     RHDV2_fasta = open("RHDV_RHDV2_NS.fasta", "w")
     RHDV2_meta = open("RHDV_RHDV2_NS.meta.tsv", "w")
     RCV_fasta = open("RHDV_RCV_NS.fasta", "w")
     RCV_meta = open("RHDV_RCV_NS.meta.tsv", "w")
+
+if meta_file.rstrip(".txt").endswith("_S"):
+    RHDV1_fasta = open("RHDV_RHDV1_S.fasta", "w")
+    RHDV1_meta = open("RHDV_RHDV1_S.meta.tsv", "w")
+    RHDV2_fasta = open("RHDV_RHDV2_S.fasta", "w")
+    RHDV2_meta = open("RHDV_RHDV2_S.meta.tsv", "w")
+    RCV_fasta = open("RHDV_RCV_S.fasta", "w")
+    RCV_meta = open("RHDV_RCV_S.meta.tsv", "w")
 
 for f in [RHDV1_meta, RHDV2_meta, RCV_meta]:
     f.write("\t".join(["strain", "strain_short", "accession", "variant_long", "variant", "date", "country", "state", "authors",
