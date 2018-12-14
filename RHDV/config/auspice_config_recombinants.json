@@ -1,0 +1,42 @@
+{
+  "title": "Rabbit caliciviruses in Australia",
+  "color_options": {
+    "num_date": {
+      "menuItem": "date",
+      "legendTitle": "Sampling date",
+      "type": "continuous",
+      "key": "date"
+    },
+    "state": {
+      "key":"state",
+      "legendTitle":"State",
+      "menuItem":"state",
+      "type":"discrete"
+    },
+    "host": {
+      "key":"host",
+      "legendTitle":"Host",
+      "menuItem":"host",
+      "type":"discrete"
+    }
+  },
+  "geo": [
+    "state",
+    "place"
+  ],
+  "geo_inference": [],
+  "defaults": {
+    "colorBy": "state",
+    "geoResolution": "place",
+    "mapTriplicate": true
+  },
+  "maintainer": [
+    "Robin Hall and Matthew Neave",
+    "mailto:robin.hall@csiro.au"
+  ],
+  "filters": [
+    "state",
+    "host",
+    "authors"
+  ]
+}

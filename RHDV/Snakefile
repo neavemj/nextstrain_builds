@@ -1,5 +1,5 @@
-VARIANTS = ["RHDV1", "RHDV2", "RCV"]
-SEGMENTS = ["NS", "S"]
+VARIANTS = ["RHDV1", "RHDV2", "recombinants"]
+SEGMENTS = ["S", "NS"]
 
 rule all:
     input:
@@ -13,7 +13,7 @@ rule files:
         dropped_strains = "config/dropped_strains.txt",
         reference = "config/KT280060_{segment}.gb",
         #colors = "config/colors.tsv",
-        auspice_config = "config/auspice_config.json"
+        auspice_config = "config/auspice_config_{variant}.json"
 
 files = rules.files.params
 
@@ -171,18 +171,28 @@ rule export:
         nt_muts = rules.ancestral.output.node_data,
         aa_muts = rules.translate.output.node_data,
         lat_longs = "data/place_lat_longs.tsv",
-        auspice_config = "config/auspice_config.json"
+        auspice_config = files.auspice_config
     output:
         auspice_tree = "auspice/RHDV_{variant}_{segment}_tree.json",
         auspice_meta = "auspice/RHDV_{variant}_{segment}_meta.json"
-    shell:
-        """
-        augur export \
-            --tree {input.tree} \
-            --metadata {input.metadata} \
-            --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
-            --auspice-config {input.auspice_config} \
-            --lat-longs {input.lat_longs} \
-            --output-tree {output.auspice_tree} \
-            --output-meta {output.auspice_meta}
-        """
+    run:
+        # don't run geo inference on the recombinants
+        # {input.traits} is removed from node-data
+        if wildcards.variant == "recombinants":
+            shell("augur export \
+                --tree {input.tree} \
+                --metadata {input.metadata} \
+                --node-data {input.branch_lengths} {input.nt_muts} {input.aa_muts} \
+                --auspice-config {input.auspice_config} \
+                --lat-longs {input.lat_longs} \
+                --output-tree {output.auspice_tree} \
+                --output-meta {output.auspice_meta}")
+        else:
+            shell("augur export \
+                --tree {input.tree} \
+                --metadata {input.metadata} \
+                --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
+                --auspice-config {input.auspice_config} \
+                --lat-longs {input.lat_longs} \
+                --output-tree {output.auspice_tree} \
+                --output-meta {output.auspice_meta}")
