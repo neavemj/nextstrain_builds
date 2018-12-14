@@ -25,11 +25,13 @@
     "state"
   ],
   "defaults": {
+    "colorBy": "state",
+    "geoResolution": "place",
     "mapTriplicate": true
   },
   "maintainer": [
-    "Matthew Neave",
-    "mailto:matthew.neave@csiro.au"
+    "Robin Hall and Matthew Neave",
+    "mailto:robin.hall@csiro.au"
   ],
   "filters": [
     "state",

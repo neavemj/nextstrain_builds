@@ -1,5 +1,5 @@
-VARIANTS = ["RHDV2"]
-SEGMENTS = ["NS"]
+VARIANTS = ["RHDV1", "RHDV2", "RCV"]
+SEGMENTS = ["NS", "S"]
 
 rule all:
     input:
@@ -10,7 +10,7 @@ rule files:
     params:
         input_fasta = "data/RHDV_{variant}_{segment}.fasta",
         input_meta = "data/RHDV_{variant}_{segment}.meta.tsv",
-        dropped_strains = "",
+        dropped_strains = "config/dropped_strains.txt",
         reference = "config/KT280060_{segment}.gb",
         #colors = "config/colors.tsv",
         auspice_config = "config/auspice_config.json"
@@ -24,7 +24,8 @@ rule filter:
         """
     input:
         sequences = files.input_fasta,
-        metadata = files.input_meta
+        metadata = files.input_meta,
+        exclude = files.dropped_strains
     output:
         sequences = "results/filtered_{variant}_{segment}.fasta"
     shell:
@@ -32,7 +33,8 @@ rule filter:
         augur filter \
             --sequences {input.sequences} \
             --metadata {input.metadata} \
-            --output {output.sequences} \
+            --exclude {input.exclude} \
+            --output {output.sequences}
         """
 
 rule align:
