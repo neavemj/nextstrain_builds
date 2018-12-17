@@ -6,14 +6,26 @@ rule all:
         auspice_meta = expand("auspice/btv_segment{segment}_meta.json", segment=SEGMENTS)
 
 
+rule files:
+    params:
+        input_fasta = "data/btv_segment{segment}.fasta",
+        input_meta = "data/btv_segment{segment}_meta.new.tsv",
+        dropped_strains = "",
+        reference = "config/btv_segment{segment}.gb",
+        #colors = "config/colors.tsv",
+        auspice_config = "config/auspice_config.json"
+
+files = rules.files.params
+
+
 rule filter:
     message:
         """
         Filtering to sequences
         """
     input:
-        sequences = "data/btv_segment{segment}.fasta",
-        metadata = "data/btv_segment{segment}.meta.tsv"
+        sequences = files.input_fasta,
+        metadata = files.input_meta
     output:
         sequences = "results/filtered_{segment}.fasta"
     shell:
@@ -32,7 +44,7 @@ rule align:
         """
     input:
         sequences = rules.filter.output.sequences,
-        reference = "config/btv_segment{segment}.gb"
+        reference = files.reference
     output:
         alignment = "results/aligned_{segment}.fasta"
     shell:
@@ -71,7 +83,7 @@ rule refine:
     input:
         tree = rules.tree.output.tree,
         alignment = rules.align.output,
-        metadata = "data/btv_segment{segment}.meta.tsv"
+        metadata = files.input_meta
     output:
         tree = "results/tree_{segment}.nwk",
         node_data = "results/branch_lengths_{segment}.json"
@@ -115,7 +127,7 @@ rule translate:
     input:
         tree = rules.refine.output.tree,
         node_data = rules.ancestral.output.node_data,
-        reference = "config/btv_segment{segment}.gb"
+        reference = files.reference
     output:
         node_data = "results/aa_muts_{segment}.json"
     shell:
@@ -131,11 +143,11 @@ rule traits:
     message: "Inferring ancestral traits for {params.columns!s}"
     input:
         tree = rules.refine.output.tree,
-        metadata = "data/btv_segment{segment}.meta.tsv"
+        metadata = files.input_meta
     output:
         node_data = "results/traits_{segment}.json"
     params:
-        columns = "state"
+        columns = "place state"
     shell:
         """
         augur traits \
@@ -150,14 +162,14 @@ rule export:
     message: "Exporting data files for for auspice"
     input:
         tree = rules.refine.output.tree,
-        metadata = "data/btv_segment{segment}.meta.tsv",
+        metadata = files.input_meta,
         branch_lengths = rules.refine.output.node_data,
         traits = rules.traits.output.node_data,
         nt_muts = rules.ancestral.output.node_data,
         aa_muts = rules.translate.output.node_data,
         colors = "config/colors.tsv",
-        lat_longs = "data/aus_state_lat_longs.tsv",
-        auspice_config = "config/auspice_config.json"
+        lat_longs = "data/place_lat_longs.tsv",
+        auspice_config = files.auspice_config
     output:
         auspice_tree = "auspice/btv_segment{segment}_tree.json",
         auspice_meta = "auspice/btv_segment{segment}_meta.json"

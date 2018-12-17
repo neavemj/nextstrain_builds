@@ -1,5 +1,2 @@
 */.snakemake/*
 .idea
-*/results/*
-*/data/*
-*/auspice/*
