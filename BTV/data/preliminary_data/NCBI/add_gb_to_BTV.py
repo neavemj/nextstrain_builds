@@ -4,7 +4,38 @@
 # also update the lat long file if required
 
 import sys
+import argparse
 from Bio import SeqIO
+
+parser = argparse.ArgumentParser("update a Nextstrain build with new NCBI sequences\n")
+
+parser.add_argument('-g', '--genbank_files', type = str,
+        nargs = "+", help = "genbank files to add (space separated)")
+parser.add_argument('-l', '--current_lat_longs', type = str,
+        nargs = "?", help = "the lat_long file for the existing build (new lat longs will be added if required)")
+parser.add_argument('-f', '--current_fastas', type = str,
+        nargs = "?", help = "the fasta files for the existing build (new sequences will be added)")
+parser.add_argument('-m', '--current_metas', type = str,
+        nargs = "?", help = "the meta files for the existing build (new meta data will be added)")
+
+# if no args given, print help and exit
+
+if len(sys.argv) == 1:
+    parser.print_help(sys.stderr)
+    sys.exit(1)
+
+args = parser.parse_args()
+
+# check required arguments are provided
+
+if args.genbank_files is None or \
+   args.current_lat_longs is None:
+    print("\n** required input missing\n"
+          "** a file containing wanted accession numbers is required\n")
+    parser.print_help(sys.stderr)
+    sys.exit(1)
+
+acc_handle = args.acc_file
 
 # function to parse downloaded genbank records
 
