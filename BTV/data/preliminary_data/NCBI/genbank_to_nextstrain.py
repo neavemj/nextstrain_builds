@@ -8,16 +8,11 @@ import argparse
 from Bio import SeqIO
 from datetime import datetime
 
-parser = argparse.ArgumentParser("update a Nextstrain build with new NCBI sequences\n")
+parser = argparse.ArgumentParser("update a Nextstrain build with new NCBI sequences\n"
+                                 "meta and fasta files will be output for each segment")
 
 parser.add_argument('-g', '--genbank_files', type = str,
-        nargs = "+", help = "genbank files to add (space separated)")
-parser.add_argument('-l', '--current_lat_longs', type = str,
-        nargs = "?", help = "the lat_long file for the existing build (new lat longs will be added if required)")
-parser.add_argument('-f', '--current_fastas', type = str,
-        nargs = "+", help = "the fasta files for the existing build (space separated)")
-parser.add_argument('-m', '--current_metas', type = str,
-        nargs = "+", help = "the meta files for the existing build (space separated)")
+        nargs = "+", help = "genbank files to convert to nextstrain")
 
 # if no args given, print help and exit
 
@@ -29,10 +24,9 @@ args = parser.parse_args()
 
 # check required arguments are provided
 
-if args.genbank_files is None or \
-   args.current_lat_longs is None:
+if args.genbank_files is None:
     print("\n** required input missing\n"
-          "** a file containing wanted accession numbers is required\n")
+          "** genbank files are required\n")
     parser.print_help(sys.stderr)
     sys.exit(1)
 
@@ -69,36 +63,31 @@ def parse_genbank(fl_name):
     record_dict["title"] = seq_record.annotations['references'][0].title
     record_dict["journal"] = seq_record.annotations['references'][0].journal
 
+    record_dict["sequence"] = str(seq_record.seq)
+
     return(record_dict)
 
-# first, extract all info from the current lat long file and add to a dict
-# then can check if new lat longs need to be added
-
-current_lat_longs = {}
-
-with open(args.current_lat_longs) as f:
-    for line in f:
-        line = line.strip()
-        cols = line.split("\t")
-        deme = cols[0]
-        place = cols[1]
-        lat_longs = (round(float(cols[2]), 1), round(float(cols[3]), 1))
-        current_lat_longs[lat_longs] = {"deme": deme, "place": place}
-
 # some bits of info in the genbank require some additional processing
-# also will check if the lat longs already exist
+
+state_abbrev = {"Northern Territory": "NT", "New South Wales": "NSW", "Victoria": "VIC", "South Australia": "SA", "Western Australia": "WA", "Queensland": "QLD", "Canberra": "ACT", "Tasmania": "TAS"}
 
 def additional_processing(raw_record_dict):
     if raw_record_dict["country"] != "Unknown":
-        country = raw_record_dict["country"].split(":")[0]
+        country = raw_record_dict["country"].split(":")[0].lower()
         state = raw_record_dict["country"].split(":")[1].split(",")[1].strip()
-        town = raw_record_dict["country"].split(":")[1].split(",")[0].strip()
+        state_short = state_abbrev[state].lower()
+        town = raw_record_dict["country"].split(":")[1].split(",")[0].strip().lower().replace(" ", "_")
     else:
         state, town = "Unknown"
 
     raw_record_dict["country"] = country
-    raw_record_dict["state"] = state
+    raw_record_dict["state"] = state_short
     raw_record_dict["town"] = town
+    raw_record_dict["place"] = town
+
+
+    raw_record_dict["lat"] = str(-float(raw_record_dict["lat_lon"].split(" ")[0]))
+    raw_record_dict["lon"] = raw_record_dict["lat_lon"].split(" ")[2]
 
     # also want to convert the date properly
     # useful info available here:
@@ -107,17 +96,6 @@ def additional_processing(raw_record_dict):
     python_date = datetime.strptime(date, "%b-%Y")
     formatted_date = str(python_date.year) + "-" + str(python_date.month) + "-XX"
     raw_record_dict["collection_date"] = formatted_date
-
-    # check if the lat longs are in the current lat long file (rounded to 1 decimal place)
-    lat = -round(float(raw_record_dict["lat_lon"].split(" ")[0]), 1)
-    long = round(float(raw_record_dict["lat_lon"].split(" ")[2]), 1)
-
-    if (lat, long) in current_lat_longs:
-        print(lat, long)
-    else:
-        print("lat longs not found")
-        print(lat, long)
-        print(current_lat_longs)
 
     return(raw_record_dict)
 
@@ -129,4 +107,21 @@ for genbank_file in args.genbank_files:
     original_dict = parse_genbank(genbank_file)
     genbank_dict[genbank_file] = additional_processing(original_dict)
 
-print(genbank_dict)
+# write out the lat longs with timestamp
+
+today = datetime.today().strftime("%d-%m-%Y")
+
+with open("lat_longs_" + today + ".tsv", "w") as f:
+    for key in genbank_dict:
+        f.write("place\t" + genbank_dict[key]["town"] + "\t" + genbank_dict[key]["lat"] + "\t" + genbank_dict[key]["lon"] + "\n")
+
+# now for the fasta and meta files
+
+for key in genbank_dict:
+    meta_fl = open("btv_segment" + genbank_dict[key]["segment"] + "_" + today + "_meta.tsv", "a")
+    fasta_fl = open("btv_segment" + genbank_dict[key]["segment"] + "_" + today + "_fasta", "a")
+    cur = genbank_dict[key]
+
+    meta_fl.write("\t".join([cur["isolate"], "BTV", key.split(".")[0], cur["segment"], cur["serotype"], cur["state"], cur["collection_date"], cur["host"], cur["lat_lon"], cur["authors"], cur["title"], cur["journal"], cur["place"]]) + "\n")
+
+    fasta_fl.write(">" + cur["isolate"] + "\n" + cur["sequence"] + "\n")
