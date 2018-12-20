@@ -85,9 +85,12 @@ def additional_processing(raw_record_dict):
     raw_record_dict["town"] = town
     raw_record_dict["place"] = town
 
-
+    # get lat lons in the right format
     raw_record_dict["lat"] = str(-float(raw_record_dict["lat_lon"].split(" ")[0]))
     raw_record_dict["lon"] = raw_record_dict["lat_lon"].split(" ")[2]
+
+    # also want the serotype to be a str, not int
+    raw_record_dict["serotype"] = "type_" + raw_record_dict["serotype"]
 
     # also want to convert the date properly
     # useful info available here:
@@ -105,7 +108,8 @@ genbank_dict = {}
 
 for genbank_file in args.genbank_files:
     original_dict = parse_genbank(genbank_file)
-    genbank_dict[genbank_file] = additional_processing(original_dict)
+    if original_dict is not None:
+        genbank_dict[genbank_file] = additional_processing(original_dict)
 
 # write out the lat longs with timestamp
 
@@ -116,6 +120,7 @@ with open("lat_longs_" + today + ".tsv", "w") as f:
         f.write("place\t" + genbank_dict[key]["town"] + "\t" + genbank_dict[key]["lat"] + "\t" + genbank_dict[key]["lon"] + "\n")
 
 # now for the fasta and meta files
+# using the 'a' parameter in the open function to append to a file rather than overwrite
 
 for key in genbank_dict:
     meta_fl = open("btv_segment" + genbank_dict[key]["segment"] + "_" + today + "_meta.tsv", "a")
