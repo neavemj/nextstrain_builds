@@ -119,7 +119,7 @@ with open("lat_longs_" + today + ".tsv", "w") as f:
 
 for key in genbank_dict:
     meta_fl = open("btv_segment" + genbank_dict[key]["segment"] + "_" + today + "_meta.tsv", "a")
-    fasta_fl = open("btv_segment" + genbank_dict[key]["segment"] + "_" + today + "_fasta", "a")
+    fasta_fl = open("btv_segment" + genbank_dict[key]["segment"] + "_" + today + ".fasta", "a")
     cur = genbank_dict[key]
 
     meta_fl.write("\t".join([cur["isolate"], "BTV", key.split(".")[0], cur["segment"], cur["serotype"], cur["state"], cur["collection_date"], cur["host"], cur["lat_lon"], cur["authors"], cur["title"], cur["journal"], cur["place"]]) + "\n")
