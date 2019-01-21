@@ -1,0 +1,211 @@
+
+ANALYSES = ["gaps", "fillgaps", "gblocks"]
+
+rule all:
+    input:
+        auspice_tree = expand("auspice/wssv_{analysis}_tree.json", analysis=ANALYSES),
+        auspice_meta = expand("auspice/wssv_{analysis}_meta.json", analysis=ANALYSES)
+
+rule files:
+    params:
+        input_fasta = "data/wssv_{analysis}.fasta",
+        input_meta = "data/wssv_{analysis}.meta.tsv",
+        dropped_strains = "",
+        reference = "config/whitespot_AF369029.2.gb",
+        #colors = "config/colors.tsv",
+        auspice_config = "config/auspice_config.json"
+
+files = rules.files.params
+
+rule filter:
+    message:
+        """
+        Filtering to sequences
+        """
+    input:
+        sequences = files.input_fasta,
+        metadata = files.input_meta
+    output:
+        sequences = "results/filtered_{analysis}.fasta"
+    shell:
+        """
+        augur filter \
+            --sequences {input.sequences} \
+            --metadata {input.metadata} \
+            --output {output.sequences}
+        """
+
+rule align:
+    message:
+        """
+        Aligning sequences to {input.reference}
+          - filling gaps with N
+        """
+    input:
+        sequences = rules.filter.output.sequences,
+        reference = files.reference
+    output:
+        alignment = "results/aligned_{analysis}.fasta"
+    threads: 16
+    run:
+        if wildcards.analysis == "gaps":
+            shell("augur align --sequences {input.sequences} --reference-sequence {input.reference} --remove-reference --output {output.alignment} --nthreads {threads}")
+        else:
+            shell("augur align --sequences {input.sequences} --reference-sequence {input.reference} --remove-reference --output {output.alignment} --nthreads {threads} --fill-gaps")
+
+
+rule gblocks:
+    # the || true bit is because gblocks exits with an error (even if it has worked correctly)
+    # no idea why, but that code 'tricks' snakemake into thinking it worked
+    message:
+        """
+        calculating well-aligned regions with gblocks
+        """
+    input:
+        raw_alignment = rules.align.output.alignment
+    output:
+        gblocks_alignment = "results/aligned_{analysis}.fasta-gb"
+    shell:
+        """
+        Gblocks \
+            {input.raw_alignment} \
+            -t=d \
+            || true
+        """
+
+def align_option(wildcards):
+    if wildcards.analysis == "gblocks":
+        return(rules.gblocks.output.gblocks_alignment)
+    else:
+        return(rules.align.output.alignment)
+
+
+rule tree:
+    message: "Building tree"
+    input:
+        #alignment = rules.align.output.alignment
+        alignment = align_option
+    output:
+        tree = "results/tree_raw_{analysis}.nwk"
+    params:
+        method = "iqtree"
+    shell:
+        """
+        augur tree \
+            --alignment {input.alignment} \
+            --output {output.tree} \
+            --method {params.method}
+        """
+
+rule refine:
+    message:
+        """
+        Refining tree
+          - estimate timetree
+          - use {params.coalescent} coalescent timescale
+          - estimate {params.date_inference} node dates
+        """
+    input:
+        tree = rules.tree.output.tree,
+        alignment = align_option,
+        metadata = files.input_meta
+    output:
+        tree = "results/tree_{analysis}.nwk",
+        node_data = "results/branch_lengths_{analysis}.json"
+    params:
+        coalescent = "opt",
+        date_inference = "marginal"
+    shell:
+        """
+        augur refine \
+            --tree {input.tree} \
+            --alignment {input.alignment} \
+            --metadata {input.metadata} \
+            --output-tree {output.tree} \
+            --output-node-data {output.node_data} \
+            --timetree \
+            --date-format %d/%m/%Y \
+            --coalescent {params.coalescent} \
+            --date-confidence \
+            --date-inference {params.date_inference}
+        """
+
+rule ancestral:
+    message: "Reconstructing ancestral sequences and mutations"
+    input:
+        tree = rules.refine.output.tree,
+        alignment = align_option
+    output:
+        node_data = "results/nt_muts_{analysis}.json"
+    params:
+        inference = "joint"
+    shell:
+        """
+        augur ancestral \
+            --tree {input.tree} \
+            --alignment {input.alignment} \
+            --output {output.node_data} \
+            --inference {params.inference}
+        """
+
+rule translate:
+    message: "Translating amino acid sequences"
+    input:
+        tree = rules.refine.output.tree,
+        node_data = rules.ancestral.output.node_data,
+        reference = files.reference
+    output:
+        node_data = "results/aa_muts_{analysis}.json"
+    shell:
+        """
+        augur translate \
+            --tree {input.tree} \
+            --ancestral-sequences {input.node_data} \
+            --reference-sequence {input.reference} \
+            --output {output.node_data}
+        """
+
+rule traits:
+    message: "Inferring ancestral traits for {params.columns!s}"
+    input:
+        tree = rules.refine.output.tree,
+        metadata = files.input_meta
+    output:
+        node_data = "results/traits_{analysis}.json"
+    params:
+        columns = "country"
+    shell:
+        """
+        augur traits \
+            --tree {input.tree} \
+            --metadata {input.metadata} \
+            --output {output.node_data} \
+            --columns {params.columns} \
+            --confidence
+        """
+
+rule export:
+    message: "Exporting data files for for auspice"
+    input:
+        tree = rules.refine.output.tree,
+        metadata = files.input_meta,
+        branch_lengths = rules.refine.output.node_data,
+        traits = rules.traits.output.node_data,
+        nt_muts = rules.ancestral.output.node_data,
+        aa_muts = rules.translate.output.node_data,
+        auspice_config = files.auspice_config,
+        lat_longs = "data/lat_longs_aus.tsv"
+    output:
+        auspice_tree = "auspice/wssv_{analysis}_tree.json",
+        auspice_meta = "auspice/wssv_{analysis}_meta.json"
+    shell:
+        """
+        augur export \
+            --tree {input.tree} \
+            --metadata {input.metadata} \
+            --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
+            --auspice-config {input.auspice_config} \
+            --lat-longs {input.lat_longs} \
+            --output-tree {output.auspice_tree} \
+            --output-meta {output.auspice_meta}
+        """
