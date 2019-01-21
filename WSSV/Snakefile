@@ -1,5 +1,5 @@
 
-ANALYSES = ["gaps", "fillgaps", "gblocks"]
+ANALYSES = ["gaps", "fillgaps", "ORF27Pol"]
 
 rule all:
     input:
@@ -11,7 +11,7 @@ rule files:
         input_fasta = "data/wssv_{analysis}.fasta",
         input_meta = "data/wssv_{analysis}.meta.tsv",
         dropped_strains = "",
-        reference = "config/whitespot_AF369029.2.gb",
+        reference = "config/whitespot_AF369029.2.{analysis}.gb",
         #colors = "config/colors.tsv",
         auspice_config = "config/auspice_config.json"
 
