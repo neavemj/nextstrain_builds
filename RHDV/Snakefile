@@ -176,23 +176,13 @@ rule export:
         auspice_tree = "auspice/RHDV_{variant}_{segment}_tree.json",
         auspice_meta = "auspice/RHDV_{variant}_{segment}_meta.json"
     run:
-        # don't run geo inference on the recombinants
-        # {input.traits} is removed from node-data
-        if wildcards.variant == "recombinants":
-            shell("augur export \
-                --tree {input.tree} \
-                --metadata {input.metadata} \
-                --node-data {input.branch_lengths} {input.nt_muts} {input.aa_muts} \
-                --auspice-config {input.auspice_config} \
-                --lat-longs {input.lat_longs} \
-                --output-tree {output.auspice_tree} \
-                --output-meta {output.auspice_meta}")
-        else:
-            shell("augur export \
-                --tree {input.tree} \
-                --metadata {input.metadata} \
-                --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
-                --auspice-config {input.auspice_config} \
-                --lat-longs {input.lat_longs} \
-                --output-tree {output.auspice_tree} \
-                --output-meta {output.auspice_meta}")
+        # don't run geo inference on any at this stage
+        # {input.traits} is removed from node-data which removes transmission lines
+        shell("augur export \
+            --tree {input.tree} \
+            --metadata {input.metadata} \
+            --node-data {input.branch_lengths} {input.nt_muts} {input.aa_muts} \
+            --auspice-config {input.auspice_config} \
+            --lat-longs {input.lat_longs} \
+            --output-tree {output.auspice_tree} \
+            --output-meta {output.auspice_meta}")
