@@ -1,5 +1,5 @@
 
-ANALYSES = ["gaps", "fillgaps", "ORF27Pol"]
+ANALYSES = ["ORF27Pol", "gaps", "fillgaps"]
 
 rule all:
     input:
@@ -194,7 +194,8 @@ rule export:
         nt_muts = rules.ancestral.output.node_data,
         aa_muts = rules.translate.output.node_data,
         auspice_config = files.auspice_config,
-        lat_longs = "data/lat_longs_aus.tsv"
+        lat_longs = "data/lat_longs_aus.tsv",
+        colors = "config/colors.tsv"
     output:
         auspice_tree = "auspice/wssv_{analysis}_tree.json",
         auspice_meta = "auspice/wssv_{analysis}_meta.json"
@@ -205,6 +206,7 @@ rule export:
             --metadata {input.metadata} \
             --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
             --auspice-config {input.auspice_config} \
+            --colors {input.colors} \
             --lat-longs {input.lat_longs} \
             --output-tree {output.auspice_tree} \
             --output-meta {output.auspice_meta}

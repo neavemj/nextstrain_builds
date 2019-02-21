@@ -3,10 +3,14 @@ DEFINITION  White spot syndrome virus, complete genome.
 ACCESSION   AF369029ORF27
 VERSION     AF369029.2ORF27
 KEYWORDS    .
-SOURCE      .
-  ORGANISM  .
+SOURCE      White spot syndrome virus
+  ORGANISM  White spot syndrome virus
             .
 FEATURES             Location/Qualifiers
+     source          1..7056
+                     /organism="white spot syndrome virus"
+                     /isolate="WSSV-TH"
+                     /country="Thailand"
      CDS             1..7056
                      /codon_start=1
                      /product="ORF27, putative DNA polymerase"
