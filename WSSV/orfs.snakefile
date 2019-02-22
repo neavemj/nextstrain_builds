@@ -1,14 +1,15 @@
 
-ANALYSES = ["gaps", "fillgaps", "gblocks"]
+ANALYSES = ["fillgaps"]
+ORFS = ["ORF125"]
 
 rule all:
     input:
-        auspice_tree = expand("auspice/wssv_{analysis}_tree.json", analysis=ANALYSES),
-        auspice_meta = expand("auspice/wssv_{analysis}_meta.json", analysis=ANALYSES)
+        auspice_tree = expand("auspice/wssv_{analysis}_{orf}_tree.json", analysis=ANALYSES, orf=ORFS),
+        auspice_meta = expand("auspice/wssv_{analysis}_{orf}_meta.json", analysis=ANALYSES, orf=ORFS)
 
 rule files:
     params:
-        input_fasta = "data/wssv_{analysis}.fasta",
+        input_alignment = "results/aligned_{analysis}.fasta",
         input_meta = "data/wssv_{analysis}.meta.tsv",
         dropped_strains = "",
         reference = "config/whitespot_AF369029.2.gb",
@@ -17,76 +18,27 @@ rule files:
 
 files = rules.files.params
 
-rule filter:
-    message:
-        """
-        Filtering to sequences
-        """
+rule chop_alignment:
+    message: "Chopping the alignment at the selected ORF boundaries"
     input:
-        sequences = files.input_fasta,
-        metadata = files.input_meta
+        alignment = files.input_alignment
     output:
-        sequences = "results/filtered_{analysis}.fasta"
+        chopped_alignment = "results/aligned_{analysis}_{orf}.fasta"
+    params:
+        orf: "ORF125"
     shell:
         """
-        augur filter \
-            --sequences {input.sequences} \
-            --metadata {input.metadata} \
-            --output {output.sequences}
+        chop_align.py \
+            -i {input.alignment}
+            -o {output.chopped_alignment}
         """
-
-rule align:
-    message:
-        """
-        Aligning sequences to {input.reference}
-          - filling gaps with N
-        """
-    input:
-        sequences = rules.filter.output.sequences,
-        reference = files.reference
-    output:
-        alignment = "results/aligned_{analysis}.fasta"
-    threads: 16
-    run:
-        if wildcards.analysis == "gaps":
-            shell("augur align --sequences {input.sequences} --reference-sequence {input.reference} --remove-reference --output {output.alignment} --nthreads {threads}")
-        else:
-            shell("augur align --sequences {input.sequences} --reference-sequence {input.reference} --remove-reference --output {output.alignment} --nthreads {threads} --fill-gaps")
-
-
-rule gblocks:
-    # the || true bit is because gblocks exits with an error (even if it has worked correctly)
-    # no idea why, but that code 'tricks' snakemake into thinking it worked
-    message:
-        """
-        calculating well-aligned regions with gblocks
-        """
-    input:
-        raw_alignment = rules.align.output.alignment
-    output:
-        gblocks_alignment = "results/aligned_{analysis}.fasta-gb"
-    shell:
-        """
-        Gblocks \
-            {input.raw_alignment} \
-            -t=d \
-            || true
-        """
-
-def align_option(wildcards):
-    if wildcards.analysis == "gblocks":
-        return(rules.gblocks.output.gblocks_alignment)
-    else:
-        return(rules.align.output.alignment)
-
 
 rule tree:
     message: "Building tree"
     input:
-        #alignment = rules.align.output.alignment
-        alignment = align_option
+        alignment = rules.chop_alignment.output
     output:
-        tree = "results/tree_raw_{analysis}.nwk"
+        tree = "results/tree_raw_{analysis}_{orf}.nwk"
     params:
         method = "iqtree"
     shell:
@@ -107,11 +59,11 @@ rule refine:
         """
     input:
         tree = rules.tree.output.tree,
-        alignment = align_option,
+        alignment = files.input_alignment,
         metadata = files.input_meta
     output:
-        tree = "results/tree_{analysis}.nwk",
-        node_data = "results/branch_lengths_{analysis}.json"
+        tree = "results/tree_{analysis}_{orf}.nwk",
+        node_data = "results/branch_lengths_{analysis}_{orf}.json"
     params:
         coalescent = "opt",
         date_inference = "marginal"
@@ -134,9 +86,9 @@ rule ancestral:
     message: "Reconstructing ancestral sequences and mutations"
     input:
         tree = rules.refine.output.tree,
-        alignment = align_option
+        alignment = files.input_alignment
     output:
-        node_data = "results/nt_muts_{analysis}.json"
+        node_data = "results/nt_muts_{analysis}_{orf}.json"
     params:
         inference = "joint"
     shell:
@@ -155,7 +107,7 @@ rule translate:
         node_data = rules.ancestral.output.node_data,
         reference = files.reference
     output:
-        node_data = "results/aa_muts_{analysis}.json"
+        node_data = "results/aa_muts_{analysis}_{orf}.json"
     shell:
         """
         augur translate \
@@ -171,7 +123,7 @@ rule traits:
         tree = rules.refine.output.tree,
         metadata = files.input_meta
     output:
-        node_data = "results/traits_{analysis}.json"
+        node_data = "results/traits_{analysis}_{orf}.json"
     params:
         columns = "country"
     shell:
@@ -196,8 +148,8 @@ rule export:
         auspice_config = files.auspice_config,
         lat_longs = "data/lat_longs_aus.tsv"
     output:
-        auspice_tree = "auspice/wssv_{analysis}_tree.json",
-        auspice_meta = "auspice/wssv_{analysis}_meta.json"
+        auspice_tree = "auspice/wssv_{analysis}_{orf}_tree.json",
+        auspice_meta = "auspice/wssv_{analysis}_{orf}_meta.json"
     shell:
         """
         augur export \
