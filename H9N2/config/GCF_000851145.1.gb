@@ -1,0 +1,101 @@
+LOCUS       NC_004908               1714 bp    RNA     linear   VRL 13-AUG-2018
+DEFINITION  Influenza A virus ha gene for Hemagglutinin, genomic RNA, strain
+            A/Hong Kong/1073/99(H9N2).
+ACCESSION   NC_004908
+VERSION     NC_004908.1
+DBLINK      BioProject: PRJNA485481
+            BioSample: SAMEA3283062
+KEYWORDS    RefSeq; HA gene; Hemagglutinin.
+SOURCE      Influenza A virus (A/Hong Kong/1073/99(H9N2))
+  ORGANISM  Influenza A virus (A/Hong Kong/1073/99(H9N2))
+            Viruses; ssRNA viruses; ssRNA negative-strand viruses;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1
+  AUTHORS   Lin,Y.P., Shaw,M., Gregory,V., Cameron,K., Lim,W., Klimov,A.,
+            Subbarao,K., Guan,Y., Krauss,S., Shortridge,K., Webster,R., Cox,N.
+            and Hay,A.
+  TITLE     Avian-to-human transmission of H9N2 subtype influenza A viruses:
+            relationship between H9N2 and H5N1 human isolates
+  JOURNAL   Proc. Natl. Acad. Sci. U.S.A. 97 (17), 9654-9658 (2000)
+   PUBMED   10920197
+REFERENCE   2  (bases 1 to 1714)
+  CONSRTM   NCBI Genome Project
+  TITLE     Direct Submission
+  JOURNAL   Submitted (21-JUN-2003) National Center for Biotechnology
+            Information, NIH, Bethesda, MD 20894, USA
+REFERENCE   3  (bases 1 to 1714)
+  AUTHORS   Lin,Y.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (21-JUN-2000) Lin Y., Virology, National Institute for
+            Medical Research, The Ridgeway, Mill Hill, London, NW7 1AA, UNITED
+            KINGDOM
+COMMENT     PROVISIONAL REFSEQ: This record has not yet been subject to final
+            NCBI review. The reference sequence is identical to AJ404626.
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..1714
+                     /organism="Influenza A virus (A/Hong Kong/1073/99(H9N2))"
+                     /mol_type="genomic RNA"
+                     /strain="A/Hong Kong/1073/99"
+                     /db_xref="taxon:130760"
+                     /note="subtype H9N2"
+     gene            32..1714
+                     /gene="ha"
+                     /locus_tag="HA"
+                     /db_xref="GeneID:1460996"
+     CDS             32..1714
+                     /gene="ha"
+                     /locus_tag="HA"
+                     /codon_start=1
+                     /product="Hemagglutinin"
+                     /protein_id="NP_859037.1"
+                     /db_xref="GOA:Q9ICY5"
+                     /db_xref="InterPro:IPR000149"
+                     /db_xref="InterPro:IPR001364"
+                     /db_xref="InterPro:IPR008980"
+                     /db_xref="InterPro:IPR013827"
+                     /db_xref="InterPro:IPR013828"
+                     /db_xref="InterPro:IPR013829"
+                     /db_xref="UniProtKB/TrEMBL:Q9ICY5"
+                     /db_xref="GeneID:1460996"
+                     /translation="METISLITILLVVTASNADKICIGHQSTNSTETVDTLTETNVPV
+                     THAKELLHTEHNGMLCATSLGHPLILDTCTIEGLVYGNPSCDLLLGGREWSYIVERSS
+                     AVNGTCYPGNVENLEELRTLFSSASSYQRIQIFPDTTWNVTYTGTSRACSGSFYRSMR
+                     WLTQKSGFYPVQDAQYTNNRGKSILFVWGIHHPPTYTEQTNLYIRNDTTTSVTTEDLN
+                     RTFKPVIGPRPLVNGLQGRIDYYWSVLKPGQTLRVRSNGNLIAPWYGHVLSGGSHGRI
+                     LKTDLKGGNCVVQCQTEKGGLNSTLPFHNISKYAFGTCPKYVRVNSLKLAVGLRNVPA
+                     RSSRGLFGAIAGFIEGGWPGLVAGWYGFQHSNDQGVGMAADRDSTQKAIDKITSKVNN
+                     IVDKMNKQYEIIDHEFSEVETRLNMINNKIDDQIQDVWAYNAELLVLLENQKTLDEHD
+                     ANVNNLYNKVKRALGSNAMEDGKGCFELYHKCDDQCMETIRNGTYNRRKYREESRLER
+                     QKIEGVKLESEGTYKILTIYSTVASSLVLAMGFAAFLFWAMSNGSCRCNICI"
+ORIGIN      
+        1 gcaaaagcag gggaattact taactagcaa aatggaaaca atatcactaa taactatact
+       61 actagtagta acagcaagca atgcagataa aatctgcatc ggccaccagt caacaaactc
+      121 cacagaaact gtggacacgc taacagaaac caatgttcct gtgacacatg ccaaagaatt
+      181 gctccacaca gagcataatg gaatgctgtg tgcaacaagc ctgggacatc ccctcattct
+      241 agacacatgc actattgaag gactagtcta tggcaaccct tcttgtgacc tgctgttggg
+      301 aggaagagaa tggtcctaca tcgtcgaaag atcatcagct gtaaatggaa cgtgttaccc
+      361 tgggaatgta gaaaacctag aggaactcag gacacttttt agttccgcta gttcctacca
+      421 aagaatccaa atcttcccag acacaacctg gaatgtgact tacactggaa caagcagagc
+      481 atgttcaggt tcattctaca ggagtatgag atggctgact caaaagagcg gtttttaccc
+      541 tgttcaagac gcccaataca caaataacag gggaaagagc attcttttcg tgtggggcat
+      601 acatcaccca cccacctata ccgagcaaac aaatttgtac ataagaaacg acacaacaac
+      661 aagcgtgaca acagaagatt tgaataggac cttcaaacca gtgatagggc caaggcccct
+      721 tgtcaatggt ctgcagggaa gaattgatta ttattggtcg gtactaaaac caggccaaac
+      781 attgcgagta cgatccaatg ggaatctaat tgctccatgg tatggacacg ttctttcagg
+      841 agggagccat ggaagaatcc tgaagactga tttaaaaggt ggtaattgtg tagtgcaatg
+      901 tcagactgaa aaaggtggct taaacagtac attgccattc cacaatatca gtaaatatgc
+      961 atttggaacc tgccccaaat atgtaagagt taatagtctc aaactggcag tcggtctgag
+     1021 gaacgtgcct gctagatcaa gtagaggact atttggagcc atagctggat tcatagaagg
+     1081 aggttggcca ggactagtcg ctggctggta tggtttccag cattcaaatg atcaaggggt
+     1141 tggtatggct gcagataggg attcaactca aaaggcaatt gataaaataa catccaaggt
+     1201 gaataatata gtcgacaaga tgaacaagca atatgaaata attgatcatg aattcagtga
+     1261 ggttgaaact agactcaata tgatcaataa taagattgat gaccaaatac aagacgtatg
+     1321 ggcatataat gcagaattgc tagtactact tgaaaatcaa aaaacactcg atgagcatga
+     1381 tgcgaacgtg aacaatctat ataacaaggt gaagagggca ctgggctcca atgctatgga
+     1441 agatgggaaa ggctgtttcg agctatacca taaatgtgat gatcagtgca tggaaacaat
+     1501 tcggaacggg acctataata ggagaaagta tagagaggaa tcaagactag aaaggcagaa
+     1561 aatagagggg gttaagctgg aatctgaggg aacttacaaa atcctcacca tttattcgac
+     1621 tgtcgcctca tctcttgtgc ttgcaatggg gtttgctgcc ttcctgttct gggccatgtc
+     1681 caatggatct tgcagatgca acatttgtat ataa
+//	 

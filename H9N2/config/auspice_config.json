@@ -1,0 +1,47 @@
+{
+  "title": "Real-time tracking of influenza A/H9N2 virus evolution",
+  "color_options": {
+    "num_date": {
+      "menuItem": "date",
+      "legendTitle": "Sampling date",
+      "type": "continuous",
+      "key": "date"
+    },
+    "type": {
+      "key":"host_type",
+      "legendTitle":"host_type",
+      "menuItem":"host_type",
+      "type":"discrete"
+    },
+    "host": {
+      "key":"country",
+      "legendTitle":"country",
+      "menuItem":"country",
+      "type":"discrete"
+    },
+    "state": {
+      "key":"location",
+      "legendTitle":"location",
+      "menuItem":"location",
+      "type":"discrete"
+    }
+  },
+  "geo": [
+    "location",
+    "country"
+  ],
+  "defaults": {
+    "colorBy": "country",
+    "geoResolution": "country",
+    "mapTriplicate": true
+  },
+  "maintainer": [
+    "Matthew Neave",
+    "mailto:matthew.neave@csiro.au"
+  ],
+  "filters": [
+    "country",
+    "host_type",
+    "location"
+  ]
+}
