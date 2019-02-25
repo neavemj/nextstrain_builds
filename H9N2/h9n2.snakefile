@@ -2,9 +2,8 @@ SEGMENTS = ["HA"]
 
 rule all:
     input:
-        expand("results/tree_{segment}.nwk", segment=SEGMENTS)
-        #auspice_tree = expand("auspice/H9N2_{segment}_tree.json", segment=SEGMENTS),
-        #auspice_meta = expand("auspice/H9N2_{segment}_meta.json", segment=SEGMENTS)
+        auspice_tree = expand("auspice/H9N2_{segment}_tree.json", segment=SEGMENTS),
+        auspice_meta = expand("auspice/H9N2_{segment}_meta.json", segment=SEGMENTS)
 
 
 rule files:
@@ -12,9 +11,9 @@ rule files:
         raw_fasta = "raw_data/FilteredH9HAaligned_FWv1.fasta",
         geo_synonyms = "config/geo_synonyms.tsv",
         dropped_strains = "",
-        reference = "config/GCF_000851145.1.gb"
+        reference = "config/GCF_000851145.1.gb",
         #colors = "config/colors.tsv",
-        #auspice_config = "config/auspice_config.json"
+        auspice_config = "config/auspice_config.json"
 
 files = rules.files.params
 
@@ -74,7 +73,7 @@ rule align:
     output:
         alignment = "results/aligned_{segment}.fasta"
     threads:
-        8
+        32
     shell:
         """
         augur align \
@@ -94,7 +93,7 @@ rule tree:
     params:
         method = "iqtree"
     threads:
-        8
+        32
     shell:
         """
         augur tree \
@@ -134,4 +133,84 @@ rule refine:
             --coalescent {params.coalescent} \
             --date-confidence \
             --date-inference {params.date_inference}
+        """
+
+rule ancestral:
+    message: "Reconstructing ancestral sequences and mutations"
+    input:
+        tree = rules.refine.output.tree,
+        alignment = rules.align.output
+    output:
+        node_data = "results/nt_muts_{segment}.json"
+    params:
+        inference = "joint"
+    shell:
+        """
+        augur ancestral \
+            --tree {input.tree} \
+            --alignment {input.alignment} \
+            --output {output.node_data} \
+            --inference {params.inference}
+        """
+
+rule translate:
+    message: "Translating amino acid sequences"
+    input:
+        tree = rules.refine.output.tree,
+        node_data = rules.ancestral.output.node_data,
+        reference = files.reference
+    output:
+        node_data = "results/aa_muts_{segment}.json"
+    shell:
+        """
+        augur translate \
+            --tree {input.tree} \
+            --ancestral-sequences {input.node_data} \
+            --reference-sequence {input.reference} \
+            --output {output.node_data}
+        """
+
+rule traits:
+    message: "Inferring ancestral traits for {params.columns!s}"
+    input:
+        tree = rules.refine.output.tree,
+        metadata = rules.create_meta.output.meta
+    output:
+        node_data = "results/traits_{segment}.json"
+    params:
+        columns = "location country"
+    shell:
+        """
+        augur traits \
+            --tree {input.tree} \
+            --metadata {input.metadata} \
+            --output {output.node_data} \
+            --columns {params.columns} \
+            --confidence
+        """
+
+rule export:
+    message: "Exporting data files for for auspice"
+    input:
+        tree = rules.refine.output.tree,
+        metadata = rules.create_meta.output.meta,
+        branch_lengths = rules.refine.output.node_data,
+        traits = rules.traits.output.node_data,
+        nt_muts = rules.ancestral.output.node_data,
+        aa_muts = rules.translate.output.node_data,
+        lat_longs = "config/lat_longs.tsv",
+        auspice_config = files.auspice_config
+    output:
+        auspice_tree = "auspice/H9N2_{segment}_tree.json",
+        auspice_meta = "auspice/H9N2_{segment}_meta.json"
+    shell:
+        """
+        augur export \
+            --tree {input.tree} \
+            --metadata {input.metadata} \
+            --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
+            --auspice-config {input.auspice_config} \
+            --lat-longs {input.lat_longs} \
+            --output-tree {output.auspice_tree} \
+            --output-meta {output.auspice_meta}
         """
