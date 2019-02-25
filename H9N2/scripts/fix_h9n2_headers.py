@@ -15,16 +15,17 @@ parser = argparse.ArgumentParser("fix headers in H9N2 sequences downloaded from 
                                  "this script will make sure all metadata is present\n"
                                  "and also try and standardise the naming\n"
                                  "'gadwall duck' => 'avian'\n"
-                                 "'water' => 'environmental'\n")
+                                 "'water' => 'environmental'\n"
+                                 "\n*strains will be dropped if they do not meet nextstrain requirements\n")
 
 parser.add_argument('-f', '--fasta_file', type = str,
         help = "fasta files to convert to nextstrain headers")
-parser.add_argument('-o', '--output', type = str,
-        help = "a name for the converted fasta file")
 parser.add_argument('-g', '--geo', type = str,
         help = "geo_synonyms.tsv file to convert label to country, division, location")
-parser.add_argument('-l', '--lat_longs', type = str,
-        help = "lat_longs.tsv file")
+parser.add_argument('-o', '--fasta_output', type = str,
+        help = "a name for the converted fasta file")
+parser.add_argument('-m', '--meta_output', type = str,
+        help = "a name for the meta file")
 
 # if no args given, print help and exit
 
@@ -55,7 +56,7 @@ def correct_strain_format(strain):
     #match = re.match(r'A/[A-Za-z-_ \.\']+/([A-Za-z0-9-_ \.\'\(\)]+/){0,3}[0-9]+ ', strain)
     match = re.match(r'A/[A-Za-z-_ \.\']+/([A-Za-z0-9-_ \.\'\(\)]+/){0,2}[0-9]+ ', strain)
     if match:
-        return match
+        return match[0]
     else:
         print("Filtered due to incorrect strain format:", strain)
         return False
@@ -135,21 +136,14 @@ with open(args.geo) as fl:
             country_set.add(country_unders)
             place_to_country[location_unders] = country_unders
 
-# read in the lat_longs
-
-lat_longs = {}
-
-with open(args.lat_longs) as fl:
-    for line in fl:
-        line = line.strip()
-        cols = line.split("\t")
-        location = cols[0]
-        lat = cols[2]
-        long = cols[3]
-        lat_longs[location] = [lat, long]
-
 # now read through fasta file and check headers
 # create metadata file for Nextstrain
+
+filtered_incorrect_strain_format = 0
+filtered_host_first_column = 0
+filtered_no_country_latlongs = 0
+records_to_write = []
+meta_to_write = {}
 
 with open(args.fasta_file) as fl:
     for record in SeqIO.parse(fl, "fasta"):
@@ -157,8 +151,11 @@ with open(args.fasta_file) as fl:
         ncbi_id = desc.split(" ")[0]
         strain_description = " ".join(desc.split(" ")[1:])
         strain_id = correct_strain_format(strain_description)
+        if not strain_id:
+            filtered_incorrect_strain_format += 1
+            continue
         if strain_id:
-            id_components = strain_id[0].split("/")
+            id_components = strain_id.split("/")
 
             # headers with 5 fields tend to more correct
             if len(id_components) == 5:
@@ -181,7 +178,8 @@ with open(args.fasta_file) as fl:
                 place in other_host:
                     # this is only 4 sequences
                     # I'll filter these out for the moment
-                    print("Filtered due to 4 fields, but host in first column:", strain_id[0])
+                    print("Filtered due to 4 fields, but host in first column:", strain_id)
+                    filtered_host_first_column += 1
                     continue
                 year = id_components[3].strip()
 
@@ -202,7 +200,8 @@ with open(args.fasta_file) as fl:
             elif place in place_to_country:
                     country = place_to_country[place]
             else:
-                print("Filtered because could not assign to a country:", strain_id[0], place)
+                print("Filtered because could not assign to a country:", strain_id, place)
+                filtered_no_country_latlongs += 1
                 continue
 
             # now deal with the year of collection
@@ -213,11 +212,33 @@ with open(args.fasta_file) as fl:
                     year = "20" + abbrev_year[0]
                 else:
                     year = "19" + abbrev_year[0]
+            date = year + "-XX-XX"
+
+            # want to have the strain id as the fasta header (not NCBI)
+            strain_id = strain_id.strip().replace(" ", "_")
+            record.id = strain_id
+            record.description = ""
+            records_to_write.append(record)
+            meta_to_write[ncbi_id] = [strain_id, "AIV", ncbi_id, "HA", "H9N2", place, country, date, host, host_type, "unpublished", "unpublished", "unpublished"]
 
 
 
-for place in comps_list:
-    print(place, lat_longs[place.lower()])
+# now write out fasta and meta files
+# meta headers should be:
+# strain virus accession segment type place country date host authors title journal
+# A/chicken/Henan AIV M542245 HA H9N2 Henan China 2018 mallard avian unpublished unpublished unpublished
+SeqIO.write(records_to_write, args.fasta_output, "fasta")
+
+with open(args.meta_output, "w") as fl:
+    fl.write("\t".join(["strain", "virus", "accession", "segment", "type", "location", "country", "date", "host", "host_type", "authors", "title", "journal"]) + "\n")
+    for ncbi_id in meta_to_write:
+        fl.write("\t".join(meta_to_write[ncbi_id]) + "\n")
+
+
+print("\nTotal records written {}\n"
+      "Filtered due to incorrect strain id: {}\n"
+      "Filtered due to host in first column: {}\n"
+      "Filtered due to missing country: {}\n".format(len(records_to_write), filtered_incorrect_strain_format, filtered_host_first_column, filtered_no_country_latlongs))
 
 
 
