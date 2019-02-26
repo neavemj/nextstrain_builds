@@ -1,0 +1,85 @@
+LOCUS       MG924990                1659 bp    RNA     linear   VRL 11-DEC-2018
+DEFINITION  Bluetongue virus 5 isolate DPP9230 segment 5, complete sequence.
+ACCESSION   MG924990
+VERSION     MG924990.1
+KEYWORDS    .
+SOURCE      Bluetongue virus 5
+  ORGANISM  Bluetongue virus 5
+            Viruses; dsRNA viruses; Reoviridae; Sedoreovirinae; Orbivirus.
+REFERENCE   1  (bases 1 to 1659)
+  AUTHORS   White,J.R., Williams,D.T., Certoma,A., Chen,H., Wang,J., Harvey,G.,
+            DiRubbo,A., Melville,L.F., Davis,S.S., Weir,R.P., Lunt,R.A. and
+            Eagles,D.
+  TITLE     Identification and Genomic Characterization of the First Isolation
+            of Bluetongue Virus Serotype 5 Detected in Australia
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1659)
+  AUTHORS   White,J.R., Certoma,A., Cheng,H., Wang,J., Harvey,G., DiRubbo,A.,
+            Melville,L., Williams,D.T. and Eagles,D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (08-FEB-2018) DSR - Molecular Diagnostics, CSIRO -
+            Australian Animal Health Laboratory, 5 Portarlington Road, Geelong,
+            Victoria 3219, Australia
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: ChromasPro v. 1.34; CLC Genomics Workbench
+            Sequencing Technology :: Illumina; Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+            v. 9.5.3
+FEATURES             Location/Qualifiers
+     source          1..1659
+                     /organism="Bluetongue virus 5"
+                     /mol_type="genomic RNA"
+                     /serotype="5"
+                     /isolate="DPP9230"
+                     /isolation_source="blood"
+                     /host="cattle"
+                     /db_xref="taxon:248909"
+                     /segment="5"
+                     /country="Australia: Beatrice Hill, Northern Territory"
+                     /lat_lon="12.643 S 131.30529 E"
+                     /collection_date="Jan-2015"
+     CDS             1..1659
+                     /note="non-structural tubule forming protein"
+                     /codon_start=1
+                     /product="NS1"
+                     /protein_id="AZJ51183.1"
+                     /translation="MERFLRKYNISGDYANATRTFLAISPQWTCSHLKRNCLFNGMCAK
+                     QNFERAMIAATDAEEPIRAFRLIELAKEAMYDRETVWLQCFKSFSQPYEEDIEGKIKRC
+                     GAQLLEDYRKSGMMEEAVKQSALINSERVRLDDSLSAIPYIYVPIREGQIVNPTFISRY
+                     RQIAYYFYNPDAADDWIDPNLFGVRGQHHQIKREVERQINTCPYTGYRGGIFQVMYLPI
+                     QLINFLRMDDFAKHFNRYASMAIQQYLRVGYLEEIRYVQQLFGKVPTGEFPLHQMMLMK
+                     RDFPTRDRNIVEARVKRSGDENWQSWLLPMVLVREGLDQQEKWGWLLEYMDRKHTCQLC
+                     YLKHSKQMQTCSVIDVRASELIGCSPFRTVTIEEHVGNAPIFKTKLICDQQIGRIGDHY
+                     YTTSCYTGAEALVTTAIHIHRWIRGCGIWNDEGWQEGVFMLGRVLLRWELTKAQRSALL
+                     RLFCFVCYGYAPRADGTVPDWNNLGSFLDIILKGPELSEDEDERAYATMFEMVRCIITL
+                     CYAEKVHFASFTAPVCESGEVINLAARMSQMWMEY"
+ORIGIN
+        1 atggagcgct ttttgagaaa atataacatc agtggagact atgctaacgc cacgagaact
+       61 tttttggcta tttcacctca atggacatgt agtcatttaa aaagaaattg tctgttcaat
+      121 gggatgtgcg cgaagcaaaa ttttgaaaga gcaatgatcg cagcgacgga tgcggaagag
+      181 ccaataaggg cattccgact gattgagttg gctaaagagg cgatgtatga tcgagagact
+      241 gtctggctac aatgctttaa aagcttttct cagccgtatg aggaagatat cgaaggcaaa
+      301 ataaagcgat gtggtgcgca gctactcgaa gattaccgca aaagtggaat gatggaggaa
+      361 gccgtaaagc aatctgctct gattaattcg gagagagtca gattagatga ttcactttct
+      421 gctattccct atatctatgt ccccataaga gagggtcaaa ttgtgaaccc aacgttcatt
+      481 tccagatacc gtcagattgc gtattacttt tacaaccctg atgcagctga tgactggata
+      541 gatccaaacc tatttggggt tagaggacag catcaccaga tcaaacgaga agttgagaga
+      601 caaatcaaca cttgccctta caccggatac agagggggaa ttttccaagt gatgtatttg
+      661 ccaattcagt tgataaattt tttaagaatg gatgatttcg caaaacattt taataggtac
+      721 gcctcgatgg ctatacaaca atatttaaga gttggatatt tggaagagat cagatatgtg
+      781 caacaactat ttgggaaggt tccaaccggc gaatttccgc tgcaccaaat gatgttaatg
+      841 aaacgtgatt ttccaacacg tgatcgcaac atcgtagaag cacgtgtgaa gaggtctggt
+      901 gatgaaaatt ggcaaagttg gctattacca atggttctgg tacgagaagg gcttgaccag
+      961 caggaaaagt gggggtggct tctggaatat atggatagga aacatacatg ccagctctgc
+     1021 tatctaaaac actcaaaaca gatgcagacg tgtagcgtaa tagatgttcg tgcttcagag
+     1081 ttgatcggtt gctcaccctt caggaccgtg acgatcgagg aacatgtggg taatgcgccg
+     1141 atttttaaga ctaagctaat ctgtgaccag caaatcggca gaattgggga tcattactac
+     1201 acgacaagtt gctacaccgg agctgaagca ttagttacga cagctattca catacaccga
+     1261 tggattagag gatgtggtat ctggaatgat gaaggatggc aggaaggagt gttcatgctg
+     1321 gggcgtgtac tactgagatg ggagctcacg aaagcgcaac gcagtgcgct actcagactc
+     1381 ttctgtttcg tctgttatgg gtatgctcct cgtgcagacg ggacagtgcc tgattggaat
+     1441 aatttaggta gttttctaga catcattttg aaaggaccgg agcttagcga agatgaggat
+     1501 gaaagagctt atgctacaat gtttgaaatg gttagatgta ttattacctt gtgctacgct
+     1561 gaaaaagtcc acttcgctag ttttaccgct ccagtgtgtg aaagtggaga agtaattaac
+     1621 ctcgccgctc gtatgtcaca gatgtggatg gagtattaa
+//

@@ -1,0 +1,72 @@
+LOCUS       JN881993                1052 bp    RNA     linear   VRL 09-JUN-2012
+DEFINITION  Bluetongue virus 1 strain CSIRO156 segment 9, complete sequence.
+ACCESSION   JN881993
+VERSION     JN881993.1
+KEYWORDS    .
+SOURCE      Bluetongue virus 1
+  ORGANISM  Bluetongue virus 1
+            Viruses; dsRNA viruses; Reoviridae; Sedoreovirinae; Orbivirus.
+REFERENCE   1  (bases 1 to 1052)
+  AUTHORS   Boyle,D.B., Bulach,D.M., Amos-Ritchie,R., Adams,M.M., Walker,P.J.
+            and Weir,R.
+  TITLE     Genomic sequences of Australian bluetongue virus prototype
+            serotypes reveal global relationships and possible routes of entry
+            into australia
+  JOURNAL   J. Virol. 86 (12), 6724-6731 (2012)
+   PUBMED   22514341
+REFERENCE   2  (bases 1 to 1052)
+  AUTHORS   Bulach,D.M., Amos-Richie,R., Weir,R., Adams,M. and Boyle,D.B.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (21-OCT-2011) Australian Animal Health Laboratory, CSIRO,
+            5 Portarlington Rd, East Geelong, VIC 3220, Australia
+COMMENT     GenBank Accession Numbers JN881985-JN881994 represent sequences
+            from the 10 segments of Bluetongue virus 1.
+FEATURES             Location/Qualifiers
+     source          1..1052
+                     /organism="Bluetongue virus 1"
+                     /mol_type="genomic RNA"
+                     /strain="CSIRO156"
+                     /host="cattle"
+                     /db_xref="taxon:35327"
+                     /segment="9"
+                     /country="Australia: Beatrice Hill, Northern Territory"
+                     /collection_date="1979"
+     CDS             16..1008
+                     /codon_start=1
+                     /gene="VP6"
+                     /product="VP6"
+                     /protein_id="AFK91704.1"
+                     /translation="MSAAMLLAPGDVIKRSSEELKQRQIQINLVDWTENESEKEEEPK
+                     VGGENKEQDNLKDGEGTQQKDGKKEKGGEEAQDANVDRRLHTTVGSGSSAKGSGERTN
+                     KDADGGDGKTRRGGGDADEGAGVVGAGRGGWVVLTDEIARAIESKYGTKVDVYRDEAS
+                     AQIIEIERSLQKELGITREGVAEQTEKLRDLRRKEKGEPRAKAVMKGDRKHGRNSRDG
+                     SSKKEGIGEEAQEETTKIGVTIEGVMSQKKLLSMIGGVERKAAPIGARESAVMLVSNN
+                     IKDVARATAYFTSPTGDPNWKEVAREASKKKNILAYSSTGGDTKMEFLHLIDHL"
+     CDS             185..418
+                     /codon_start=1
+                     /gene="NS4"
+                     /product="NS4"
+                     /protein_id="AFK91705.1"
+                     /translation="MVRGHNRRMARRKRAAKKLKMQMWIDAYILQWDLDQAQKDLESA
+                     RTRMLTEEMERLEEEVEMLMRELELLERAEEDG"
+ORIGIN      
+        1 gttaaaaaat cgcatatgtc agctgcgatg ctacttgcac ccggtgacgt gattaaacgt
+       61 tcatccgagg agttaaaaca gaggcaaatt cagataaact tagttgattg gactgaaaac
+      121 gaaagtgaga aggaagaaga accaaaagta ggaggagaga ataaggaaca agacaacttg
+      181 aaagatggtg aggggacaca acagaaggat ggcaagaagg aaaagggcgg cgaagaagct
+      241 caagatgcaa atgtggatag acgcttacat actacagtgg gatctggatc aagcgcaaaa
+      301 ggatctggag agcgcacgaa caaggatgct gacggaggag atggaaagac tagaagagga
+      361 ggtggagatg ctgatgaggg agctggagtt gttggagcgg gcagaggagg atgggtagtg
+      421 ttaactgatg agatcgctcg cgcgattgaa tctaaatacg gtacgaaggt cgatgtttac
+      481 agggatgagg cgtcagcgca gataatcgag atcgagcgaa gcttacaaaa ggagctgggg
+      541 atcacccgag aaggagtggc ggagcaaacg gaaaagctga gagatctgcg acgtaaagag
+      601 aaaggtgaac ctcgggctaa ggcagtgatg aaaggagatc ggaaacatgg aaggaatagc
+      661 cgagacggct cctcaaaaaa ggaaggtatt ggagaggaag cacaggagga aaccaccaaa
+      721 attggcgtaa caatcgaagg agtcatgagt caaaagaagc ttctaagtat gatcggtggt
+      781 gttgagagga aggcggcgcc gataggggcg cgggagagtg ccgttatgct agtgtcgaat
+      841 aacattaagg atgtggcgcg tgcaacagca tacttcactt cgcccacggg agacccaaat
+      901 tggaaggagg tggcgcgcga ggcctcaaag aaaaagaata ttttggcata ttcgagcacg
+      961 ggtggagata ctaagatgga gttccttcat ttaattgatc acctctaaag ggtccagggt
+     1021 accttcttga cgtaatgcga ttttacactt ac
+//
+

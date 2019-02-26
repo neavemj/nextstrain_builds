@@ -1,0 +1,67 @@
+LOCUS       JN881992                1125 bp    RNA     linear   VRL 09-JUN-2012
+DEFINITION  Bluetongue virus 1 strain CSIRO156 segment 8, complete sequence.
+ACCESSION   JN881992
+VERSION     JN881992.1
+KEYWORDS    .
+SOURCE      Bluetongue virus 1
+  ORGANISM  Bluetongue virus 1
+            Viruses; dsRNA viruses; Reoviridae; Sedoreovirinae; Orbivirus.
+REFERENCE   1  (bases 1 to 1125)
+  AUTHORS   Boyle,D.B., Bulach,D.M., Amos-Ritchie,R., Adams,M.M., Walker,P.J.
+            and Weir,R.
+  TITLE     Genomic sequences of Australian bluetongue virus prototype
+            serotypes reveal global relationships and possible routes of entry
+            into australia
+  JOURNAL   J. Virol. 86 (12), 6724-6731 (2012)
+   PUBMED   22514341
+REFERENCE   2  (bases 1 to 1125)
+  AUTHORS   Bulach,D.M., Amos-Richie,R., Weir,R., Adams,M. and Boyle,D.B.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (21-OCT-2011) Australian Animal Health Laboratory, CSIRO,
+            5 Portarlington Rd, East Geelong, VIC 3220, Australia
+COMMENT     GenBank Accession Numbers JN881985-JN881994 represent sequences
+            from the 10 segments of Bluetongue virus 1.
+FEATURES             Location/Qualifiers
+     source          1..1125
+                     /organism="Bluetongue virus 1"
+                     /mol_type="genomic RNA"
+                     /strain="CSIRO156"
+                     /host="cattle"
+                     /db_xref="taxon:35327"
+                     /segment="8"
+                     /country="Australia: Beatrice Hill, Northern Territory"
+                     /collection_date="1979"
+     CDS             20..1084
+                     /codon_start=1
+                     /gene="NS2"
+                     /product="NS2"
+                     /protein_id="AFK91703.1"
+                     /translation="MEQKQRKFTKNIFVLDVNAKTLCGVIAKQSPQPYCQIKIGRVIA
+                     FKPVKNPEPKGYVLNVPGPGAYRIQDGQDIISIMLTSCGVEATTERWEEWKFEGVSVT
+                     PMATRVQHNGVMVDAEIKYCKGMGIVQPYMKNDFDRNEMPNLPGVMRSNYDIRELRQK
+                     IKNEREMAPRPQVQSAVPREESRWMDEDEARVSEEMKEAASSASRLERLREARANMFK
+                     EVEAGVSWSLSHQGEERADEDVDEDHDDHQVDEDEQDEDASDDEQLKTHITKEYIEKV
+                     AKQVKLKDERFMSLSSAMPQASGGFDRMIVTKKLKWQNVPLYCFDESTKRYELQCVGA
+                     CERVAFVSKDMSLIILPVGV"
+ORIGIN      
+        1 gttaaaaaat ccttgagtca tggagcaaaa gcaacgtaaa ttcactaaaa acatctttgt
+       61 tttggatgtc aatgctaaga cattatgcgg ggtgatcgca aaacaaagtc cacagccgta
+      121 ttgtcaaata aaaattggaa gagtgattgc ttttaaacca gttaagaatc cagaacccaa
+      181 gggttatgtc ttaaacgttc cgggaccagg tgcctataga atacaagatg ggcaagatat
+      241 cataagcata atgttaacat catgcggggt ggaggcaacg actgagagat gggaagagtg
+      301 gaaatttgaa ggcgtgagtg taacaccgat ggcgacacga gtacaacata atggagttat
+      361 ggtagatgca gagataaagt attgcaaggg gatgggaatc gtccaaccat atatgaaaaa
+      421 tgacttcgac cgaaatgaaa tgccgaattt accaggtgta atgaggtcca attatgatat
+      481 acgtgagctt cgacaaaaga ttaagaatga gcgcgagatg gcaccgcgcc cacaggttca
+      541 gagcgcggta ccaagggagg agtcgcgttg gatggatgaa gatgaggcga gggtcagcga
+      601 agagatgaaa gaagccgctt ccagcgcaag tcggctggaa agattgcgtg aggcaagagc
+      661 gaatatgttt aaggaagtag aggctggtgt tagctggagc ttgagtcatc aaggtgaaga
+      721 gagggcggat gaagatgtag atgaagacca tgatgatcat caagtcgatg aagacgaaca
+      781 ggatgaggac gctagtgatg atgaacaact caagactcat atcacaaaag agtatattga
+      841 aaaggtcgcg aaacaggtta aacttaagga tgaacgattt atgagtttgt cgagcgccat
+      901 gccgcaagcg agtgggggct ttgatcgtat gatagtcact aagaagctga agtggcagaa
+      961 tgtaccactt tactgttttg atgaatctac taaaaggtat gaactgcagt gtgtaggtgc
+     1021 gtgtgagcgt gttgcttttg tctctaagga catgagctta atcatattgc cggtcggcgt
+     1081 ttaggcgctt gtgatcgcgt ggttaggggg ggattttaca cttac
+//
+

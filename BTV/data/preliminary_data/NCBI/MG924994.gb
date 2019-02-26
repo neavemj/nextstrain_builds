@@ -1,0 +1,76 @@
+LOCUS       MG924994                 993 bp    RNA     linear   VRL 11-DEC-2018
+DEFINITION  Bluetongue virus 5 isolate DPP9230 segment 9, complete sequence.
+ACCESSION   MG924994
+VERSION     MG924994.1
+KEYWORDS    .
+SOURCE      Bluetongue virus 5
+  ORGANISM  Bluetongue virus 5
+            Viruses; dsRNA viruses; Reoviridae; Sedoreovirinae; Orbivirus.
+REFERENCE   1  (bases 1 to 993)
+  AUTHORS   White,J.R., Williams,D.T., Certoma,A., Chen,H., Wang,J., Harvey,G.,
+            DiRubbo,A., Melville,L.F., Davis,S.S., Weir,R.P., Lunt,R.A. and
+            Eagles,D.
+  TITLE     Identification and Genomic Characterization of the First Isolation
+            of Bluetongue Virus Serotype 5 Detected in Australia
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 993)
+  AUTHORS   White,J.R., Certoma,A., Cheng,H., Wang,J., Harvey,G., DiRubbo,A.,
+            Melville,L., Williams,D.T. and Eagles,D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (08-FEB-2018) DSR - Molecular Diagnostics, CSIRO -
+            Australian Animal Health Laboratory, 5 Portarlington Road, Geelong,
+            Victoria 3219, Australia
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: ChromasPro v. 1.34; CLC Genomics Workbench
+            Sequencing Technology :: Illumina; Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+            v. 9.5.3
+FEATURES             Location/Qualifiers
+     source          1..993
+                     /organism="Bluetongue virus 5"
+                     /mol_type="genomic RNA"
+                     /serotype="5"
+                     /isolate="DPP9230"
+                     /isolation_source="blood"
+                     /host="cattle"
+                     /db_xref="taxon:248909"
+                     /segment="9"
+                     /country="Australia: Beatrice Hill, Northern Territory"
+                     /lat_lon="12.643 S 131.30529 E"
+                     /collection_date="Jan-2015"
+     CDS             1..993
+                     /note="helicase"
+                     /codon_start=1
+                     /product="VP6"
+                     /protein_id="AZJ51187.1"
+                     /translation="MSAAILLAPGDVIKRSSEELKQRQIQISLVDWTESKSEKEEEPKQ
+                     EGESEKQDKLSDGEGAQQKDGKKKESGKETQDANVDRRLHTTVGFGSSAKGFGERADKD
+                     ADRGDGKTRGGGGDADEGAGTAGASRGGWVVLTDEIARAIESKYGTKVDVYRDEASAQI
+                     IEIERSLQKELGITREGVAEQTEKLRDLRRKERGEPRTKAVVKGDRKRGRSSQDSSSKK
+                     EGVGEEVQEETTKVGITIEGVMSQKKLLSMIGGVERKAAPIGARESAVMLVSNNIKDVA
+                     RATAYFTSPTGDPNWKEVAREASKKKNILAYSSTGGDTKTEFLHLIDHL"
+     CDS             170..403
+                     /codon_start=1
+                     /product="NS4"
+                     /protein_id="AZJ51188.1"
+                     /translation="MVRGHNRRMARRKRAAKKLKMQMWIDAYILQWDLDQAQKDLENAR
+                     TRMLTEEMERLEEEVEMLMRELELLERAEEDG"
+ORIGIN
+        1 atgtcagctg cgatactact tgcacccggt gacgtgatta aacgttcatc cgaggagtta
+       61 aaacagagac aaattcagat tagtttagtt gattggaccg aaagcaaaag tgagaaagag
+      121 gaagaaccaa aacaagaagg agagagtgaa aaacaagaca aattaagcga tggtgagggg
+      181 gcacaacaga aggatggcaa gaagaaagag agcggcaaag aaactcaaga tgcaaatgtg
+      241 gatagacgct tacatactac agtgggattt ggatcaagcg caaaaggatt tggagaacgc
+      301 gcggacaagg atgctgacag aggagatgga aagactagag gaggaggtgg agatgctgat
+      361 gagggagctg gaactgctgg agcgagcaga ggaggatggg tagtattaac tgatgagatc
+      421 gctcgcgcga ttgaatctaa atacggtacg aaagttgatg tttacagaga tgaggcgtcg
+      481 gcgcagataa tcgaaatcga gcggagctta caaaaggagc tgggaatcac ccgagaggga
+      541 gtggcggaac aaacggaaaa gctgagagat ctgcgacgca aagaaagagg tgagccgcgg
+      601 accaaggcag tggtgaaagg agatcggaag cgtggaagaa gtagccaaga tagctcctca
+      661 aagaaggaag gcgttggaga ggaggtgcag gaggaaacca ctaaggtcgg cataacaatc
+      721 gaaggagtta tgagtcaaaa gaaacttttg agcatgatag gtggtgttga gaggaaggcg
+      781 gcaccgatag gagcgcggga gagtgccgtt atgctggtgt caaataatat taaggatgtg
+      841 gcgcgtgcaa cagcatattt cacttcaccc acgggagacc caaattggaa ggaggtggcg
+      901 cgcgaagctt caaagaaaaa gaacatcttg gcatactcga gcacgggtgg agatactaag
+      961 acggaattcc ttcatctaat tgatcacctc taa
+//

@@ -7,19 +7,19 @@
       "type": "continuous",
       "key": "date"
     },
-    "type": {
+    "host_type": {
       "key":"host_type",
       "legendTitle":"host_type",
       "menuItem":"host_type",
       "type":"discrete"
     },
-    "host": {
+    "country": {
       "key":"country",
       "legendTitle":"country",
       "menuItem":"country",
       "type":"discrete"
     },
-    "state": {
+    "location": {
       "key":"location",
       "legendTitle":"location",
       "menuItem":"location",

@@ -1,0 +1,92 @@
+LOCUS       MG924989                1937 bp    RNA     linear   VRL 11-DEC-2018
+DEFINITION  Bluetongue virus 5 isolate DPP9230 segment 4, complete sequence.
+ACCESSION   MG924989
+VERSION     MG924989.1
+KEYWORDS    .
+SOURCE      Bluetongue virus 5
+  ORGANISM  Bluetongue virus 5
+            Viruses; dsRNA viruses; Reoviridae; Sedoreovirinae; Orbivirus.
+REFERENCE   1  (bases 1 to 1937)
+  AUTHORS   White,J.R., Williams,D.T., Certoma,A., Chen,H., Wang,J., Harvey,G.,
+            DiRubbo,A., Melville,L.F., Davis,S.S., Weir,R.P., Lunt,R.A. and
+            Eagles,D.
+  TITLE     Identification and Genomic Characterization of the First Isolation
+            of Bluetongue Virus Serotype 5 Detected in Australia
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1937)
+  AUTHORS   White,J.R., Certoma,A., Cheng,H., Wang,J., Harvey,G., DiRubbo,A.,
+            Melville,L., Williams,D.T. and Eagles,D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (08-FEB-2018) DSR - Molecular Diagnostics, CSIRO -
+            Australian Animal Health Laboratory, 5 Portarlington Road, Geelong,
+            Victoria 3219, Australia
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: ChromasPro v. 1.34; CLC Genomics Workbench
+            Sequencing Technology :: Illumina; Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+            v. 9.5.3
+FEATURES             Location/Qualifiers
+     source          1..1937
+                     /organism="Bluetongue virus 5"
+                     /mol_type="genomic RNA"
+                     /serotype="5"
+                     /isolate="DPP9230"
+                     /isolation_source="blood"
+                     /host="cattle"
+                     /db_xref="taxon:248909"
+                     /segment="4"
+                     /country="Australia: Beatrice Hill, Northern Territory"
+                     /lat_lon="12.643 S 131.30529 E"
+                     /collection_date="Jan-2015"
+     CDS             3..1937
+                     /note="capping enzyme"
+                     /codon_start=1
+                     /product="VP4"
+                     /protein_id="AZJ51182.1"
+                     /translation="MPEPHAVLYVTNELTHLVKSGYLPIWHLTGNESLNDLWLENGKYA
+                     TDVYAYGDVSKWTIRQLRGHGFIFISTHKSVQLADIIKTVDVRISREVVKSQDMKMFEN
+                     EIGRRRIRMRKGFGDALRSYAFKVAIEFHGSEAETLNDANPRLHRVYGMPEAPPLYMEY
+                     AEIGNKFDDEPTDEKLVSMLDYIIYSAEEIHYVGCGDLRTLMQFKRRSPGRFKRVLWHV
+                     YDPIAPQCSDTNVIVHNVMVDSKKDILKHMNFLKRVERLFIWDVSSDRNQMDDDEWEST
+                     RFAEDRLGEEIAYEMGGAFSSALIKHRIPAMRDEYHCISTYLLPQPGADTDMYELRNFM
+                     RLKGYSHVDRHMHPDAAVMKVVSRDVRRMVEMFHGRDRGRFLKKRIFEHLHIIRKNGLF
+                     HESDEPRADLFYLTNRCNMGLEPSIYEVMKKSTIATVWVGRTPLYDYDDYSLPRSTVML
+                     NGSYRDIRVLDGNGAILFLMWKYPDIIKRDLTYDPAWAMNFAVSLKEPIPDPPVPDISL
+                     CRFIGLRVESSVLRVRNPTLHETADELKRMGLDLSGHLYVTLMSGAYVTDLFWWFKMIL
+                     EWSSQGKEQKICDLKRSAAEVIEWKEQMAERPWHVRNDLIAALREYKRKMGTREGASID
+                     SWLELLRHL"
+ORIGIN
+        1 acatgcctga gccacacgca gtactttatg tcacaaacga gctcactcac ctcgttaaga
+       61 gtggttattt acctatatgg cacttgacag gaaatgaaag tttaaatgat ttgtggttag
+      121 agaatgggaa gtacgcgaca gatgtttatg cgtatggaga tgtatcaaag tggacgataa
+      181 gacagcttcg aggccatgga tttattttca ttagtacaca taaaagtgtc caactcgcag
+      241 acatcatcaa gacagtcgac gttcgcatat cgcgtgaagt tgtcaaaagc caagatatga
+      301 aaatgtttga aaatgaaata ggtcggcgtc gaattaggat gcggaaaggt tttggtgatg
+      361 cgctaaggag ctacgctttt aaggttgcga tcgaatttca tggatcagag gcggaaacat
+      421 taaacgatgc aaatccccgg ttacatagag tgtatgggat gccagaagcc cctccgttgt
+      481 acatggaata tgctgaaatt ggaaataaat ttgacgatga accaactgat gagaagttag
+      541 tctcaatgtt ggattacata atttatagtg cggaggaaat acactatgtt ggatgcggcg
+      601 atttacgcac tttgatgcaa tttaagaggc gttcgcctgg gcggtttaag agggtgctgt
+      661 ggcacgtcta tgacccaatc gcgccgcagt gttcagatac gaatgtcatc gtacataatg
+      721 ttatggttga ttccaagaag gacattctaa agcatatgaa tttcttaaag cgcgttgaaa
+      781 gattatttat atgggatgta tcatctgatc gaaatcaaat ggatgatgat gaatgggaat
+      841 cgacaagatt cgcagaagat aggttgggtg aagaaatcgc gtatgagatg ggcggagctt
+      901 tctctagcgc cttaatcaag cacagaatac cagctatgag agatgaatac cactgtatat
+      961 cgacttactt gctcccacaa ccgggagcgg atacggatat gtatgagtta agaaatttta
+     1021 tgagactaaa gggctactca catgtagatc gtcacatgca tcctgatgcg gcggtgatga
+     1081 aagtcgtgtc ccgtgatgta cgtagaatgg tcgagatgtt tcacggtagg gatcgtgggc
+     1141 gattccttaa aaaaagaatt tttgaacatc tacacattat acgtaagaat ggactgtttc
+     1201 atgagagcga tgagcctcga gcggatttat tttacttaac caatagatgc aatatgggtt
+     1261 tggagcctag catttatgag gtgatgaaaa aatcaacaat agccacggta tgggtgggtc
+     1321 gcacaccatt gtatgattat gatgactatt ccttaccaag atctaccgtc atgctaaatg
+     1381 ggtcgtatcg tgatataaga gttttggatg gcaatggcgc gatattattc ttgatgtgga
+     1441 agtatccaga tataataaag agggatttga cgtatgatcc tgcgtgggcg atgaactttg
+     1501 ccgtatcatt gaaggaaccc ataccagacc caccagtacc agatatttca ctatgtagat
+     1561 ttattggatt acgtgttgaa tcttccgtgt taagggttcg gaatcctaca cttcacgaga
+     1621 cagcggatga gcttaagcga atggggttag atctctcagg acacctatat gtgacgttaa
+     1681 tgtccggtgc ctacgttaca gacttatttt ggtggtttaa gatgatttta gagtggtcat
+     1741 cgcaggggaa ggaacagaaa atatgtgatt tgaagaggtc agcggctgag gttattgagt
+     1801 ggaaggagca aatggctgag cgtccgtggc acgttagaaa tgatttaatt gctgcgctaa
+     1861 gggagtataa gcgtaaaatg ggaacgagag agggggcctc gattgattcg tggcttgaat
+     1921 tactgcgtca cctatga
+//

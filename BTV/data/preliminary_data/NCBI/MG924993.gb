@@ -1,0 +1,73 @@
+LOCUS       MG924993                1065 bp    RNA     linear   VRL 11-DEC-2018
+DEFINITION  Bluetongue virus 5 isolate DPP9230 segment 8, complete sequence.
+ACCESSION   MG924993
+VERSION     MG924993.1
+KEYWORDS    .
+SOURCE      Bluetongue virus 5
+  ORGANISM  Bluetongue virus 5
+            Viruses; dsRNA viruses; Reoviridae; Sedoreovirinae; Orbivirus.
+REFERENCE   1  (bases 1 to 1065)
+  AUTHORS   White,J.R., Williams,D.T., Certoma,A., Chen,H., Wang,J., Harvey,G.,
+            DiRubbo,A., Melville,L.F., Davis,S.S., Weir,R.P., Lunt,R.A. and
+            Eagles,D.
+  TITLE     Identification and Genomic Characterization of the First Isolation
+            of Bluetongue Virus Serotype 5 Detected in Australia
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1065)
+  AUTHORS   White,J.R., Certoma,A., Cheng,H., Wang,J., Harvey,G., DiRubbo,A.,
+            Melville,L., Williams,D.T. and Eagles,D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (08-FEB-2018) DSR - Molecular Diagnostics, CSIRO -
+            Australian Animal Health Laboratory, 5 Portarlington Road, Geelong,
+            Victoria 3219, Australia
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: ChromasPro v. 1.34; CLC Genomics Workbench
+            Sequencing Technology :: Illumina; Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+            v. 9.5.3
+FEATURES             Location/Qualifiers
+     source          1..1065
+                     /organism="Bluetongue virus 5"
+                     /mol_type="genomic RNA"
+                     /serotype="5"
+                     /isolate="DPP9230"
+                     /isolation_source="blood"
+                     /host="cattle"
+                     /db_xref="taxon:248909"
+                     /segment="8"
+                     /country="Australia: Beatrice Hill, Northern Territory"
+                     /lat_lon="12.643 S 131.30529 E"
+                     /collection_date="Jan-2015"
+     CDS             1..1065
+                     /function="forms cytoplasmic viral inclusion bodies"
+                     /note="non-structural protein"
+                     /codon_start=1
+                     /product="NS2"
+                     /protein_id="AZJ51186.1"
+                     /translation="MEQKQRKFTKNIFVLDVNAKTLCGVIAKQSSQPYCQIKIGRVIAF
+                     KPVKNPEPKGYVLNVPGPGAYRIQDGQDIISIMLTSCGVEATTERWEEWKFEGVSVTPM
+                     ATRVQHNGVMVDAEIKYCKGMGIVQPYMKNDFDRNEMPDLPGVMRSNYDIRELRQKIKN
+                     EREMAPRPQVQSAVPREESRWMDEDEARVSEEMKEAASSASRLERLREARANMFKEVEA
+                     GVSWNLSHQGDERADEDVDEDHDDHHADEDEQDEDASDDEQLKTHITKEYIEKVAKQIK
+                     LKDERFMSLSSAMPQASGGFDRVIATKKLKWQNVPLYCFDESTKRYELQCVGACERVAF
+                     VSKDMSLIILPIGV"
+ORIGIN
+        1 atggagcaaa agcaacgtaa attcactaag aacatttttg ttttggatgt caatgctaag
+       61 acattatgcg gggtgatcgc aaagcagagt tcacagccgt attgtcaaat aaaaattgga
+      121 agagtaatcg cttttaaacc agttaagaat ccagaaccca agggttatgt cttgaacgtt
+      181 ccggggccag gtgcttatag aatacaggat ggacaagata tcataagcat aatgttaaca
+      241 tcatgtgggg tggaggcgac gactgagaga tgggaagagt ggaaatttga aggtgtgagt
+      301 gtaacaccaa tggcaacacg agtacaacac aatggagtta tggtagatgc agaaataaag
+      361 tattgcaagg ggatgggaat cgttcaacca tatatgaaaa atgatttcga ccgaaatgaa
+      421 atgccggatt taccaggtgt aatgaggtcc aattatgata tacgcgaact tcgacaaaag
+      481 attaagaatg agcgtgagat ggcgccgcgc ccacaggttc agagcgcggt accaagggag
+      541 gagtcgcgtt ggatggatga agatgaggcg agggtcagcg aagagatgaa ggaagccgct
+      601 tctagcgcaa gtcggctaga aaggttgcgt gaagcgagag cgaatatgtt caaggaagta
+      661 gaggctggtg ttagctggaa tttgagtcat caaggcgatg agagggcgga tgaagatgtg
+      721 gatgaagatc atgatgatca tcacgccgat gaagacgaac aggacgagga cgctagtgat
+      781 gatgaacaac tcaagactca tatcacgaag gagtatattg aaaaggtcgc gaaacagatt
+      841 aaacttaagg atgaacgatt tatgagtttg tcgagcgcca tgccgcaagc gagtgggggc
+      901 ttcgatcgtg tgatagctac taagaagttg aagtggcaga atgtaccact ttactgtttt
+      961 gatgaatcta ctaaaaggta tgaattgcaa tgtgtaggtg cgtgtgagcg tgttgctttt
+     1021 gtctctaagg acatgagctt aatcatattg ccgatcggcg tttag
+//

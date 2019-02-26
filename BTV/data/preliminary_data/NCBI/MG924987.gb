@@ -1,0 +1,113 @@
+LOCUS       MG924987                2886 bp    RNA     linear   VRL 11-DEC-2018
+DEFINITION  Bluetongue virus 5 isolate DPP9230 segment 2, complete sequence.
+ACCESSION   MG924987
+VERSION     MG924987.1
+KEYWORDS    .
+SOURCE      Bluetongue virus 5
+  ORGANISM  Bluetongue virus 5
+            Viruses; dsRNA viruses; Reoviridae; Sedoreovirinae; Orbivirus.
+REFERENCE   1  (bases 1 to 2886)
+  AUTHORS   White,J.R., Williams,D.T., Certoma,A., Chen,H., Wang,J., Harvey,G.,
+            DiRubbo,A., Melville,L.F., Davis,S.S., Weir,R.P., Lunt,R.A. and
+            Eagles,D.
+  TITLE     Identification and Genomic Characterization of the First Isolation
+            of Bluetongue Virus Serotype 5 Detected in Australia
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 2886)
+  AUTHORS   White,J.R., Certoma,A., Cheng,H., Wang,J., Harvey,G., DiRubbo,A.,
+            Melville,L., Williams,D.T. and Eagles,D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (08-FEB-2018) DSR - Molecular Diagnostics, CSIRO -
+            Australian Animal Health Laboratory, 5 Portarlington Road, Geelong,
+            Victoria 3219, Australia
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: ChromasPro v. 1.34; CLC Genomics Workbench
+            Sequencing Technology :: Illumina; Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+            v. 9.5.3
+FEATURES             Location/Qualifiers
+     source          1..2886
+                     /organism="Bluetongue virus 5"
+                     /mol_type="genomic RNA"
+                     /serotype="5"
+                     /isolate="DPP9230"
+                     /isolation_source="blood"
+                     /host="cattle"
+                     /db_xref="taxon:248909"
+                     /segment="2"
+                     /country="Australia: Beatrice Hill, Northern Territory"
+                     /lat_lon="12.643 S 131.30529 E"
+                     /collection_date="Jan-2015"
+     CDS             1..2868
+                     /note="major outer-coat virus neutralization protein"
+                     /codon_start=1
+                     /product="VP2"
+                     /protein_id="AZJ51180.1"
+                     /translation="MDEFGVPIFRSSQVPHHILEGYDIKVDLSDRVVQEDGRHDPNKLK
+                     ERKTIDVPNGEARFDLSYNPTDNEGNQLPRALDIALCARLTRKSFNTNSGVTFHTDHKW
+                     MEWMLSDAMDVQPLRIDLAAQSEYAKCDLFNSSVYVRKKYVDAISYRYISVEDDSKGCN
+                     HTRIYSVNHLINCGLYNVAQECAYAFKDTNTLIVNSQRENTSEPFQPGNPRIGSLGRRA
+                     RVDMADPGYPLFRAGLLQIVVNGTIPADIRSEMDRLNQIREAWKRDKNTREVRALDLCI
+                     LLSKIGRIKMNMEEEPKDEGAMSLRFQGKIDAMFFSENTEKTNIMRDGSGRTDDERFYA
+                     LLLICATDAFSRRIWRTNPYPCLRGTLIAAECVLGDPYKTLRRKFDWSVRHAGDKMLEG
+                     SSYVFTRINLFDTDKAPGSRVIHWIQETFPVIKTTWAEGCSLADEAPDDHLHCKIDHVQ
+                     YRDLVSRVINGGWDQENFKIHKLFVERGNIFLMDFEKDAKITTQSEVEYPYYYDTWVYA
+                     PIFSTRYKITETEIANAKSPDPAIKRTLAPLSDDPVALQLRAVGHLYDTRPAIMGQTLS
+                     SRQNQTALHKTLLDDPENDRYYKARSIKKVDNPCSVHYTSSFILQKTSELVLSLMIYHI
+                     EHDWEPLKQYTHPEISTEFGEISCEICDISQLTVLLIDLFFENRRTVRPSEETRYIIHQ
+                     IRESRGDGRLKTLERLFPAYGQALRKIESATEVGHITMLNFLPFFFLLGDNIIYKHREW
+                     TVPILIYTDGVMIWPAQVGANYNRFGFCGFLNYMRFHAGSQLRSKVLDDAEKTIAKEML
+                     KYYMKTDIFSGGVQKNIRVTKSMQMEIYHSSLCGGLSDAMVYALPISFPIKCLTLIIIG
+                     DDLVEPQLRISRVMDYFKHVSEHVRGIASISISRNGDVSTYSRGIVHVELLKKNILKYQ
+                     FQVALLKVKGYVFGNDEMLIKLLNV"
+ORIGIN
+        1 atggatgagt tcggtgtccc aatatttcgg tcgagccaag ttccccacca catactcgaa
+       61 ggatatgata tcaaggttga cttgagtgat agggtcgtgc aagaggatgg tcgtcatgat
+      121 ccaaacaaat taaaagaacg gaaaacgata gatgtaccaa atggtgaagc cagatttgat
+      181 ctgagttaca acccaacgga taatgagggt aaccagctac cacgtgcgct agacattgca
+      241 ttatgtgcgc ggcttacgag aaaaagtttc aacacaaaca gtggtgttac atttcatacg
+      301 gatcacaaat ggatggaatg gatgctatcc gatgcaatgg atgttcagcc actgcgaatc
+      361 gatttagcag cgcagagcga gtatgcaaaa tgtgacttat ttaattcttc ggtctatgtc
+      421 aggaaaaaat acgttgatgc gatttcatat agatacatat cggtggaaga tgattctaag
+      481 gggtgcaatc atacgaggat ttatagcgtg aatcacttga taaattgtgg attatataac
+      541 gtggcgcaag agtgtgcgta tgcgtttaag gatacaaata cattaatagt taactcacaa
+      601 agagaaaaca ctagtgagcc gttccagcct ggaaatccaa ggattggaag tctagggaga
+      661 agggcgaggg ttgacatggc tgatcctggg tatccgcttt tccgcgcagg gttacttcaa
+      721 atagtcgtta atggcaccat accagctgat atacgtagtg agatggatcg cttgaatcaa
+      781 atacgtgagg cgtggaaacg tgataaaaat acaagagaag tcagagcgct cgacttatgt
+      841 atactgctat cgaagattgg tcgaattaag atgaatatgg aagaagaacc taaggatgag
+      901 ggggccatgt cgttaagatt tcaggggaag attgacgcga tgtttttctc ggaaaatacg
+      961 gagaaaacga atattatgcg agatggtagt ggtagaactg atgatgaaag attttacgcc
+     1021 ttattgctga tctgcgctac ggatgcgttc tcacgacgta tatggcgcac taacccgtat
+     1081 ccatgtttac gaggcacctt aatcgcagca gaatgtgtat tgggagaccc atataaaacg
+     1141 ttacgtcgta agtttgattg gagtgtgcgc catgcaggag ataagatgct ggaggggtcc
+     1201 tcgtatgttt ttacaaggat aaacttattc gatacggata aggcgccagg ctcacgtgta
+     1261 atacactgga tacaagagac atttcctgtc ataaaaacaa cctgggctga gggatgttct
+     1321 ttagctgatg aggcgccaga tgatcattta cattgcaaaa tagatcacgt acaatataga
+     1381 gatctggtgt caagagttat aaatggaggt tgggatcaag agaattttaa gatacataaa
+     1441 ttatttgttg aacgaggcaa tattttctta atggattttg aaaaggacgc aaagataact
+     1501 acacagtctg aggtggagta cccatactat tatgatacat gggtctatgc gccgatcttt
+     1561 agcacgaggt acaagataac agagactgaa atcgccaacg caaaaagccc ggaccctgcg
+     1621 attaagcgga cgctagcccc attgtctgat gatcccgtag cgttacaact aagagccgta
+     1681 ggacatctgt atgacactcg ccccgctata atgggtcaaa cgctgtcatc acgccagaat
+     1741 cagactgcac tacacaaaac gttattagat gatcctgaaa atgataggta ctataaagca
+     1801 cgatcgatca agaaagtcga taatccttgc tccgttcatt acacatcatc attcatatta
+     1861 cagaaaacct ctgagttagt cttaagtttg atgatttatc acattgaaca tgactgggag
+     1921 ccactgaagc aatacacaca tccggaaatc tcaacggagt tcggcgaaat atcgtgtgag
+     1981 atatgtgaca tctcccagct aactgtatta ttgattgatt tattctttga aaatagacga
+     2041 acggtacgtc caagtgagga gacgagatat ataattcatc agatccgaga atcgagaggt
+     2101 gatggcagac ttaagacgct agaacgactc tttcctgcct atgggcaagc tcttcgcaaa
+     2161 atcgagagcg caactgaagt aggacatata actatgttga attttttgcc ttttttcttt
+     2221 ttattgggag ataacattat atataaacat agggagtgga ctgttccaat cttaatatac
+     2281 actgatggcg tcatgatatg gcccgcgcag gtaggcgcta attataatag atttggtttc
+     2341 tgcggtttcc ttaattatat gagattccat gctgggagcc aactgagatc taaagtactc
+     2401 gatgatgctg agaaaaccat tgcaaaagaa atgcttaagt actatatgaa aaccgacatt
+     2461 ttcagtggag gcgtccaaaa gaatatacgc gtcacgaaat caatgcaaat ggaaatatat
+     2521 cactcatcgc tgtgtggagg attatcagac gcaatggtat atgcactgcc aattagcttc
+     2581 ccgatcaaat gtttgacgtt gattattatt ggtgatgatc tcgttgaacc tcagctcaga
+     2641 atctcaaggg ttatggatta ttttaagcat gtgagtgagc acgtccgagg tattgcatca
+     2701 atctcaattt caagaaatgg agatgtttct acctattctc gcggcattgt gcatgtcgag
+     2761 ttgttaaaga aaaatatatt aaagtaccaa tttcaagtcg ctttactaaa ggttaaagga
+     2821 tacgtgtttg gcaacgatga aatgctcatt aaattactga acgtttagtc tcatgtcact
+     2881 gagact
+//

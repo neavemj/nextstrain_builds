@@ -1,0 +1,81 @@
+LOCUS       JN881989                1770 bp    RNA     linear   VRL 09-JUN-2012
+DEFINITION  Bluetongue virus 1 strain CSIRO156 segment 5, complete sequence.
+ACCESSION   JN881989
+VERSION     JN881989.1
+KEYWORDS    .
+SOURCE      Bluetongue virus 1
+  ORGANISM  Bluetongue virus 1
+            Viruses; dsRNA viruses; Reoviridae; Sedoreovirinae; Orbivirus.
+REFERENCE   1  (bases 1 to 1770)
+  AUTHORS   Boyle,D.B., Bulach,D.M., Amos-Ritchie,R., Adams,M.M., Walker,P.J.
+            and Weir,R.
+  TITLE     Genomic sequences of Australian bluetongue virus prototype
+            serotypes reveal global relationships and possible routes of entry
+            into australia
+  JOURNAL   J. Virol. 86 (12), 6724-6731 (2012)
+   PUBMED   22514341
+REFERENCE   2  (bases 1 to 1770)
+  AUTHORS   Bulach,D.M., Amos-Richie,R., Weir,R., Adams,M. and Boyle,D.B.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (21-OCT-2011) Australian Animal Health Laboratory, CSIRO,
+            5 Portarlington Rd, East Geelong, VIC 3220, Australia
+COMMENT     GenBank Accession Numbers JN881985-JN881994 represent sequences
+            from the 10 segments of Bluetongue virus 1.
+FEATURES             Location/Qualifiers
+     source          1..1770
+                     /organism="Bluetongue virus 1"
+                     /mol_type="genomic RNA"
+                     /strain="CSIRO156"
+                     /host="cattle"
+                     /db_xref="taxon:35327"
+                     /segment="5"
+                     /country="Australia: Beatrice Hill, Northern Territory"
+                     /collection_date="1979"
+     CDS             35..1693
+                     /codon_start=1
+                     /gene="NS1"
+                     /product="NS1"
+                     /protein_id="AFK91700.1"
+                     /translation="MERFLRKYNISGDYANATRTFLAISPQWTCSHLKRNCLFNGMCA
+                     KQNFERAMIAATDAEEPIKAIRLIELAKEAMYDRETVWLQCFKSFSQPYEEDIEGKIK
+                     RCGAQLLEDYRKSGMMEEAVKQSALINSERVRLDDSLSAIPYIYVPIKEGQIVNPTFI
+                     SRYRQIAYYFYNPDAADDWIDPNLFGVRGQHHQIKREVERQINTCPYTGYKGGIFQVM
+                     YLPIQLINFLRMDDFARHFNRYASMAIQQYLRVGYLEEIRYVQQLFGKVPSGEFPLHQ
+                     MMLMRRDFPTRDRNIVEARVKRSGDENWQSWLLPMVLVREGLDQQEKWEWLLEYMDRK
+                     HICQLCYLKHSKQIQTCSVIDVRASELIGCSPFRTVKIEEHVGNEPIFKTKLIRDQQI
+                     GRIGDHYYTTSCYTGAEALVTTAIHIHRWIRGCGIWNDEGWQEGVFMLGRVLLRWELT
+                     KAQRSALLRLFCFVCYGYAPRADGTVPDWNNLGSFLDIILKGPELSEDEDERAYATMF
+                     EMVRCIITLCYAERVHFAGFTAPACESGEVINLAARMSQMWMEY"
+ORIGIN      
+        1 gttaaaaaag ttctctagtt ggcaaccacc aaacatggag cgctttttga gaaaatacaa
+       61 cattagtgga gattatgcta atgccacgag aacttttttg gctatatcac ctcaatggac
+      121 ttgtagtcac ttaaaaagaa attgcttatt caatgggatg tgtgcgaaac agaattttga
+      181 gagagcaatg attgcagcga cggatgcgga ggaaccaata aaagcaatcc ggctgataga
+      241 attggcaaaa gaggcgatgt atgatcgaga gaccgtttgg ctgcagtgtt ttaaaagctt
+      301 ctctcagccg tatgaggagg atatcgaagg caagataaaa cgatgcggtg cacagctact
+      361 tgaagattac cgcaaaagtg gaatgatgga ggaggccgta aagcaatctg ctttgattaa
+      421 ttcggagagg gttagattag acgattcgct ttcggccatt ccctatattt atgttcccat
+      481 aaaagaaggt caaattgtga atccaacgtt catctccagg tatcgccaga tcgcgtatta
+      541 tttctacaat ccagatgcag ctgacgattg gatagatcca aatctatttg gggttagagg
+      601 acagcatcat caaattaagc gagaagttga gaggcagatc aacacttgcc cttatactgg
+      661 atacaaagga ggaattttcc aagtgatgta tttaccaatt caactaataa acttcctaag
+      721 gatggatgat tttgcaagac atttcaatag gtatgcttcg atggccatac agcaatattt
+      781 aagagttgga tatttagaag agattaggta tgtgcaacaa ttattcggga aggttccatc
+      841 tggcgaattc ccactgcatc agatgatgtt aatgagacgt gatttcccaa cgcgcgaccg
+      901 taacatcgta gaagcgcgtg tgaaaaggtc gggtgacgaa aattggcaaa gctggttatt
+      961 accaatggtc ctggtgcgag aagggctaga tcagcaggag aagtgggaat ggcttctaga
+     1021 gtatatggat agaaaacaca tatgccagct ctgctatttg aaacattcaa agcagataca
+     1081 gacgtgtagc gtaatagatg ttcgcgcttc agagttgatc ggttgctcac ccttcagaac
+     1141 tgtaaagatc gaggagcacg taggtaatga accaatcttt aaaactaagc taattcgtga
+     1201 tcagcaaatc ggcagaattg gggatcatta ttacacaacg agctgctaca ctggagctga
+     1261 agcgttggtt acaactgcta tccatataca tcgatggatc agagggtgtg gtatctggaa
+     1321 tgatgaagga tggcaggagg gagtgtttat gctgggacgt gtgttattaa ggtgggagct
+     1381 tacgaaggcg cagcgcagcg cactgcttag gctcttctgc tttgtctgtt atggatatgc
+     1441 tccccgcgcg gatggaacgg tacccgattg gaacaattta ggcagtttct tagatatcat
+     1501 cttgaaagga ccggagctca gcgaagatga ggatgaaaga gcttatgcta caatgtttga
+     1561 aatggttcga tgtattatca ccttgtgtta tgctgagaga gttcactttg ctggattcac
+     1621 tgccccggca tgtgaaagtg gggaagtaat caatctcgct gctcgcatgt cacagatgtg
+     1681 gatggaatat tagttgttag ttttttgaat ttatcttatt tgctcattct attttctctc
+     1741 ttagcactct actagaactt tacaacttac
+//
+
