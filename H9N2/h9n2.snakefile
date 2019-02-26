@@ -1,9 +1,10 @@
 SEGMENTS = ["HA"]
+FILTERING = ["ALL", "10-per-year"]
 
 rule all:
     input:
-        auspice_tree = expand("auspice/H9N2_{segment}_tree.json", segment=SEGMENTS),
-        auspice_meta = expand("auspice/H9N2_{segment}_meta.json", segment=SEGMENTS)
+        auspice_tree = expand("auspice/H9N2_{filter}_tree.json", filter=FILTERING),
+        auspice_meta = expand("auspice/H9N2_{filter}_meta.json", filter=FILTERING)
 
 
 rule files:
@@ -30,10 +31,10 @@ rule create_meta:
         sequences = files.raw_fasta,
         geo_synonyms = files.geo_synonyms
     output:
-        sequences = "data/H9N2_{segment}.fasta",
-        meta = "data/H9N2_{segment}.meta.tsv"
+        sequences = "data/H9N2_{filter}.fasta",
+        meta = "data/H9N2_{filter}.meta.tsv"
     log:
-        "logs/{segment}.create_meta.log"
+        "logs/{filter}.create_meta.log"
     shell:
         """
         ./scripts/fix_h9n2_headers.py \
@@ -52,14 +53,26 @@ rule filter:
         sequences = rules.create_meta.output.sequences,
         metadata = rules.create_meta.output.meta
     output:
-        sequences = "results/filtered_{segment}.fasta"
-    shell:
-        """
-        augur filter \
-            --sequences {input.sequences} \
-            --metadata {input.metadata} \
-            --output {output.sequences}
-        """
+        sequences = "results/filtered_{filter}.fasta"
+    run:
+        if wildcards.filter == "ALL":
+            shell(
+            """
+            augur filter \
+                --sequences {input.sequences} \
+                --metadata {input.metadata} \
+                --output {output.sequences}
+            """)
+        elif wildcards.filter == "10-per-year":
+            shell(
+            """
+            augur filter \
+                --sequences {input.sequences} \
+                --metadata {input.metadata} \
+                --output {output.sequences} \
+                --group-by country date \
+                --sequences-per-group 10
+            """)
 
 rule align:
     message:
@@ -71,7 +84,7 @@ rule align:
         sequences = rules.filter.output.sequences,
         reference = files.reference
     output:
-        alignment = "results/aligned_{segment}.fasta"
+        alignment = "results/aligned_{filter}.fasta"
     threads:
         32
     shell:
@@ -90,7 +103,7 @@ rule tree:
     input:
         alignment = rules.align.output.alignment
     output:
-        "results/tree_raw_{segment}.nwk"
+        "results/tree_raw_{filter}.nwk"
     params:
         method = "iqtree"
     threads:
@@ -117,8 +130,8 @@ rule refine:
         alignment = rules.align.output,
         metadata = rules.create_meta.output.meta
     output:
-        tree = "results/tree_{segment}.nwk",
-        node_data = "results/branch_lengths_{segment}.json"
+        tree = "results/tree_{filter}.nwk",
+        node_data = "results/branch_lengths_{filter}.json"
     params:
         coalescent = "const",
         date_inference = "marginal",
@@ -144,7 +157,7 @@ rule ancestral:
         tree = rules.refine.output.tree,
         alignment = rules.align.output
     output:
-        node_data = "results/nt_muts_{segment}.json"
+        node_data = "results/nt_muts_{filter}.json"
     params:
         inference = "joint"
     shell:
@@ -163,7 +176,7 @@ rule translate:
         node_data = rules.ancestral.output.node_data,
         reference = files.reference
     output:
-        node_data = "results/aa_muts_{segment}.json"
+        node_data = "results/aa_muts_{filter}.json"
     shell:
         """
         augur translate \
@@ -179,7 +192,7 @@ rule traits:
         tree = rules.refine.output.tree,
         metadata = rules.create_meta.output.meta
     output:
-        node_data = "results/traits_{segment}.json"
+        node_data = "results/traits_{filter}.json"
     params:
         columns = "location country"
     shell:
@@ -204,8 +217,8 @@ rule export:
         lat_longs = "config/lat_longs.tsv",
         auspice_config = files.auspice_config
     output:
-        auspice_tree = "auspice/H9N2_{segment}_tree.json",
-        auspice_meta = "auspice/H9N2_{segment}_meta.json"
+        auspice_tree = "auspice/H9N2_{filter}_tree.json",
+        auspice_meta = "auspice/H9N2_{filter}_meta.json"
     shell:
         """
         augur export \
