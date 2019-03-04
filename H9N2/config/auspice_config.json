@@ -31,7 +31,7 @@
     "country"
   ],
   "defaults": {
-    "colorBy": "country",
+    "colorBy": "date",
     "geoResolution": "country",
     "mapTriplicate": true
   },
