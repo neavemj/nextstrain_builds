@@ -8,8 +8,8 @@ rule all:
 
 rule files:
     params:
-        input_fasta = "data/btv_segment{segment}_20-12-2018.fasta",
-        input_meta = "data/btv_segment{segment}_20-12-2018_meta.tsv",
+        input_fasta = "data/btv_segment{segment}_27-02-2019.fasta",
+        input_meta = "data/btv_segment{segment}_27-02-2019_meta.tsv",
         dropped_strains = "",
         reference = "config/btv_segment{segment}.gb",
         #colors = "config/colors.tsv",
