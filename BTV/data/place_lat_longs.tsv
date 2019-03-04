@@ -7,6 +7,7 @@ place	casino	-28.85819	153.04749
 place	cooktown	-15.47028	145.24986
 place	dalby_-_fyrish_downs	-27.18169	151.26206
 place	douglas_daly	-13.83271	131.18716
+place	douglas_daly_research_farm	-13.83271	131.18716
 place	gloucester	-32.0077	151.96331
 place	kempsey	-31.07898	152.83093
 place	maitland	-32.75085	151.59039
@@ -25,7 +26,16 @@ place	victoria_river_research_station	-16.11667	130.95779
 place	wingham	-31.86676	152.36989
 place	wollongbar	-28.82506	153.41478
 place	york_down_-_weipa	-12.62346	141.87883
+place	york_downs	-12.62346	141.87883
 place	place_1	-12.39	131.20
+place	papua	-4.269900	138.080400
+place	west_java	-7.090900	107.668900
+place	merapah	-13.717560	142.414788
+place	coastal_plains_research_farm	-12.596599	131.306328
+place	coastal_plains_research_station	-12.596599	131.306328
+place	kununurra	-15.779089	128.741657
+place	jandowie	-26.787210	151.097113
+place	katherine_research_station	-14.473971	132.305325
 state	act	-35.473469	149.012375
 state	nsw	-31.840233	145.612793
 state	nt	-19.491411	132.550964
@@ -34,3 +44,5 @@ state	sa	-30.000233	136.209152
 state	tas	-41.640079	146.315918
 state	vic	-36.686043	143.580322
 state	wa	-25.760321	122.805176
+state	ind	-0.789300	113.921300
+state	png	-6.315000	143.955500
