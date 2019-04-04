@@ -9,7 +9,7 @@ rule all:
 
 rule files:
     params:
-        raw_fasta = "raw_data/FilteredH9HAaligned_FWv1.fasta",
+        raw_fasta = "raw_data/FilteredH9HAaligned_withIndodata_FWv1_editedHeaders.fasta",
         geo_synonyms = "config/geo_synonyms.tsv",
         dropped_strains = "",
         reference = "config/GCF_000851145.1.gb",
@@ -214,6 +214,7 @@ rule export:
         traits = rules.traits.output.node_data,
         nt_muts = rules.ancestral.output.node_data,
         aa_muts = rules.translate.output.node_data,
+        colors = "config/colors.tsv",
         lat_longs = "config/lat_longs.tsv",
         auspice_config = files.auspice_config
     output:
@@ -226,6 +227,7 @@ rule export:
             --metadata {input.metadata} \
             --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
             --auspice-config {input.auspice_config} \
+            --colors {input.colors} \
             --lat-longs {input.lat_longs} \
             --output-tree {output.auspice_tree} \
             --output-meta {output.auspice_meta}
