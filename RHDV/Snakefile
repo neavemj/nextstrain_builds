@@ -87,7 +87,7 @@ rule refine:
         alignment = rules.align.output,
         metadata = files.input_meta
     output:
-        tree = "results/tree_{variant}_{segment}.nwk",
+        tree = "results/tree_refine_{variant}_{segment}.nwk",
         node_data = "results/branch_lengths_{variant}_{segment}.json"
     params:
         coalescent = "opt",

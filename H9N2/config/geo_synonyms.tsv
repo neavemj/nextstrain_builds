@@ -1172,6 +1172,7 @@ Medan	Indonesia	Sumatra	Medan
 MuraoJambi	Indonesia	Sumatra	MuraoJambi
 Nagrak	Indonesia	Java	Nagrak
 NorthSumatra	Indonesia	Sumatra	NorthSumatra
+WestSumatra	Indonesia	Sumatra	WestSumatra
 Palembangsumatra	Indonesia	Sumatra	Palembang
 Pangkalpinang	Indonesia	BangkaBelitung	Pangkalpinang
 Parung	Indonesia	Java	Parung
@@ -1190,11 +1191,15 @@ Sleman	Indonesia	Java	Sleman
 Sragen	Indonesia	Java	Sragen
 Surakarta	Indonesia	Jateng	Surakarta
 Sulawesi	Indonesia	Sulawesi	Sulawesi
+NorthSulawesi	Indonesia	Sulawesi	NorthSulawesi
+SouthSulawesi	Indonesia	Sulawesi	SouthSulawesi
 Sukoharjo	Indonesia	Java	Sukoharjo
 TanahDatar	Indonesia	Sumatra	TanahDatar
 Tasikmalaya	Indonesia	Java	Tasikmalaya
 Temanggung	Indonesia	Java	Temanggung
 WestJava	Indonesia	Java	WestJava
+EastJava	Indonesia	Java	EastJava
+CentralJava	Indonesia	Java	CentralJava
 Wonogiri	Indonesia	Java	Wonogiri
 Wonosobo	Indonesia	Java	Wonosobo
 Yogyakarta	Indonesia	Java	Yogyakarta
