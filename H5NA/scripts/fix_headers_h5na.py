@@ -16,12 +16,15 @@ parser = argparse.ArgumentParser("fix headers in H9N2 sequences downloaded from 
                                  "and also try and standardise the naming\n"
                                  "'gadwall duck' => 'avian'\n"
                                  "'water' => 'environmental'\n"
+                                 "\n*the file avain.txt contains bird names that will be converted"
                                  "\n*strains will be dropped if they do not meet nextstrain requirements\n")
 
 parser.add_argument('-f', '--fasta_file', type = str,
         help = "fasta files to convert to nextstrain headers")
 parser.add_argument('-g', '--geo', type = str,
         help = "geo_synonyms.tsv file to convert label to country, division, location")
+parser.add_argument('-a', '--avian', type = str,
+        help = "avain.txt file lists bird names to convert to 'avian'. Add names here for new birds.")
 parser.add_argument('-o', '--fasta_output', type = str,
         help = "a name for the converted fasta file")
 parser.add_argument('-m', '--meta_output', type = str,
@@ -70,13 +73,15 @@ def correct_strain_format(strain):
 # Hmm, this is a lot - even I fix a few, Nextstrain could never display so many colours
 # might have have to go with just human, avian, or environmental - this is what the nextstrain guys do
 
-avian_host = ['ruddy turnstone', 'rosy-billed pochard', 'common teal', 'knot', 'turtledove', 'shorebird', 'muscovy duck', 'silkie chicken', 'green winged teal', 'wild waterfowl', 'pigeon', 'greater white-fronted goose', 'poultry', 'crow', 'coot', 'falcon', 'sparrow', 'gull', 'cackling goose', 'pelican', 'Chicken', 'goose', 'sanderling', 'Muscovy duck', 'bewicks swan', 'chiken', 'partridge', 'teal', 'Chinese francolin', 'avian', 'brambling', 'blue-winged teal', 'northern pintail', 'Chinese Hwamei', 'baikal teal', 'red knot', 'quail', 'parakeet', 'wild chicken', 'ck', 'Anas platyrhynchos', 'duck', 'Korean native chicken', 'black chicken', 'emperor goose', 'Anser fabalis', 'stone curlew', 'common murre', 'Himantopus himantopus', 'wild bird', 'turkey', 'mallard duck', 'chicken', 'green-winged teal', 'gadwall', 'northern shoveler', 'bird', 'laughing gull', 'Duck', 'mallard', 'common redshank', 'black-headed gull', 'egret', 'Mediterranean gull', 'bean goose', 'guineafowl', 'American oystercatcher', 'black-billed magpie', 'Avian', 'gadwall duck', "Bewick's swan", 'African Stonechat', 'ostrich', 'Japanese Quail', 'pink-footed goose', 'pheasant', 'American wigeon', 'Eurasian wigeon', 'broiler chicken', 'dove', 'Anthropoides virgo', 'American green-winged teal', 'white-fronted goose']
+avian_host = [bird.strip() for bird in open(args.avian)]
 
-environment_host = ['feces', 'environment', 'wild bird feces', 'pigeon feces']
+environment_host = ['feces', 'Environment', 'Enviroment', 'environment', 'enviroment', 'wild bird feces', 'pigeon feces', 'water']
 
-nonhuman_mammal_host = ['canine', 'swine', 'pika', 'equine', 'mink', 'Sw', 'swine']
+nonhuman_mammal_host = ['canine', 'swine', 'pika', 'equine', 'mink', 'Sw', 'swine', 'tiger', 'cat', 'lion', 'feline']
 
 other_host = ['ferret', 'insect']
+
+unknown_host_set = set()
 
 def format_host(host):
     '''
@@ -104,18 +109,19 @@ def format_host(host):
         else:
             print("Could not assign host {}".format(host))
             print("Leaving current host designation as is")
+            unknown_host_set.add(host)
             return(host)
 
 
 # some of the places seem like obvious spelling errors which I'll fix here
 # YN might be a province in China - will leave it for the moment - it will get filtered in the next step
 
-place_convert = {"FuJian": "Fujian", "GuangXi": "Guangxi", "GuiZhou": "Guizhou", "Heiilongjian": "Heilongjiang", "Heiilongjiang": "Heilongjiang",
+place_convert = {"FuJian": "Fujian", "GuangXi": "Guangxi", "GuiZhou": "Guizhou", "Heiilongjian": "Heilongjiang", "Heiilongjiang": "Heilongjiang", "Khanhhoa": "KhanhHoa",
                  "HongKong": "Hong Kong", "Shaanxi": "Shanxi", "ShanXi": "Shanxi", "Shangdong": "Shandong",
-                 "Yunnanbn": "Yunnan", "Yunnandh": "Yunnan", "Yunnanws": "Yunnan", "DE": "Delaware", "Emirates": "United Arab Emirates",
+                 "Yunnanbn": "Yunnan", "Yunnandh": "Yunnan", "Yunnanws": "Yunnan", "DE": "Delaware", "Emirates": "United Arab Emirates", "Eastern China": "China",
                  "Heibei": "Hebei", "HeBei": "Hebei", "Interior Alaska": "Alaska", "MN": "Minnesota", "NZL": "New Zealand",
-                 "PT": "Portugal", "ShanDong": "Shandong", "Southcentral Alaska": "Alaska", "TX": "Texas", "YN": "YN", "Korea": "South Korea",
-                 "Delaware Bay": "Delaware"}
+                 "PT": "Portugal", "ShanDong": "Shandong", "Southcentral Alaska": "Alaska", "TX": "Texas", "YN": "YN", "Korea": "South Korea", "Democratic Republic of the Congo": "Congo",
+                 "Delaware Bay": "Delaware", "Rostov-on-Don": "RostovOnDon"}
 
 # in the nextstrain github, there is a big list of places and what country they are in
 # they also have a decent list of lat longs
@@ -153,11 +159,25 @@ meta_to_write = {}
 with open(args.fasta_file) as fl:
     for record in SeqIO.parse(fl, "fasta"):
         desc = record.description
-        ncbi_id = desc.split(" ")[0]
-        strain_description = " ".join(desc.split(" ")[1:])
+        desc_list = desc.split(" ")
+        if len(desc_list) > 1:
+            ncbi_id = desc.split(" ")[0]
+            strain_description = " ".join(desc.split(" ")[1:]).lstrip("_")
+        else:
+            # think these are from Gisaid
+            # they don't start with an accession number and have underscores
+            # separating some other number at the end
+            ncbi_id = "unassigned"
+            strain_description = desc.split("_|_")[0].rstrip("_").rstrip("_H5N1")
+            # sometimes they also include the lineage in brackets at the end
+            # this stops my regex working
+            # the regex also needs a space at the end
+            strain_description = strain_description.split("(")[0].rstrip("_") + " "
+
         strain_id = correct_strain_format(strain_description)
         if not strain_id:
             filtered_incorrect_strain_format += 1
+            print(desc)
             continue
         if strain_id:
             id_components = strain_id.split("/")
@@ -188,7 +208,8 @@ with open(args.fasta_file) as fl:
                     continue
                 year = id_components[3].strip()
 
-            # the new Indonesian isolates have a header with 6 fields
+            # some of the isolates have 6 fields
+            # this could be tricky because the place doesn't seem to be consistent
             elif len(id_components) == 6:
                 host = id_components[1]
                 host_type = format_host(host)
@@ -249,6 +270,8 @@ with open(args.meta_output, "w") as fl:
     for strain_id in meta_to_write:
         fl.write("\t".join(meta_to_write[strain_id]) + "\n")
 
+with open("unknown_hosts.txt", "w") as fl:
+    for host in unknown_host_set: fl.write(host + "\n")
 
 print("\nTotal fasta records written {}\n"
       "Total meta data entries: {}\n"
