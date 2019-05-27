@@ -149,10 +149,11 @@ with open(args.fasta) as fl:
                     # use representative strain info to check against other strains
                     # if any of these fields are different, the stain will be kept
                     if any([ \
-                       #meta_dict[strain]["location"] not in location_set, \
-                       #meta_dict[strain]["country"] not in country_set, \
-                       #meta_dict[strain]["host"] not in host_set, \
-                       meta_dict[strain]["date"] not in date_set]):
+                       meta_dict[strain]["location"] not in location_set, \
+                       meta_dict[strain]["country"] not in country_set, \
+                       meta_dict[strain]["host"] not in host_set, \
+                       meta_dict[strain]["date"] not in date_set \
+                       ]):
 
                        # one of these must be different to the current cluster metadata
                        # add the new entries
