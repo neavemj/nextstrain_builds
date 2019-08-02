@@ -13,33 +13,25 @@ from Bio import SeqIO
 
 fasta_file = sys.argv[1]
 meta_file = sys.argv[2]
+segment = sys.argv[3]
 
 variant_convert = {"GI.1a": "RHDV1", "GI.1c": "RHDV1", "GI.4eP_GI.1a": "RHDV1", "GI.1bP_GI.2": "RHDV2", "GI.4eP_GI.2":
     "RCV"}
 
 # need to write meta data separately for each variant
 
-if meta_file.rstrip(".txt").endswith("_NS"):
-    RHDV1_fasta = open("RHDV_RHDV1_NS.fasta", "w")
-    RHDV1_meta = open("RHDV_RHDV1_NS.meta.tsv", "w")
-    RHDV2_fasta = open("RHDV_RHDV2_NS.fasta", "w")
-    RHDV2_meta = open("RHDV_RHDV2_NS.meta.tsv", "w")
-    RCV_fasta = open("RHDV_RCV_NS.fasta", "w")
-    RCV_meta = open("RHDV_RCV_NS.meta.tsv", "w")
-
-if meta_file.rstrip(".txt").endswith("_S"):
-    RHDV1_fasta = open("RHDV_RHDV1_S.fasta", "w")
-    RHDV1_meta = open("RHDV_RHDV1_S.meta.tsv", "w")
-    RHDV2_fasta = open("RHDV_RHDV2_S.fasta", "w")
-    RHDV2_meta = open("RHDV_RHDV2_S.meta.tsv", "w")
-    RCV_fasta = open("RHDV_RCV_S.fasta", "w")
-    RCV_meta = open("RHDV_RCV_S.meta.tsv", "w")
+RHDV1_fasta = open("RHDV_RHDV1_" + segment + ".fasta", "w")
+RHDV1_meta = open("RHDV_RHDV1_" + segment + ".meta.tsv", "w")
+RHDV2_fasta = open("RHDV_RHDV2_" + segment + ".fasta", "w")
+RHDV2_meta = open("RHDV_RHDV2_" + segment + ".meta.tsv", "w")
+RCV_fasta = open("RHDV_RCV_" + segment + ".fasta", "w")
+RCV_meta = open("RHDV_RCV_" + segment + ".meta.tsv", "w")
 
 for f in [RHDV1_meta, RHDV2_meta, RCV_meta]:
     f.write("\t".join(["strain", "strain_short", "accession", "variant_long", "variant", "date", "country", "state", "authors",
                        "title", "host", "lat_long"]) + "\n")
 
-# want a accession to strain dict for the fasta writing
+# want an accession to strain dict for the fasta writing
 
 acc_to_strain = {}
 strain_to_variant = {}
@@ -71,8 +63,7 @@ with open(meta_file, encoding="cp1252") as f:
         lat_long = lat + " " + long
 
         acc_to_strain[acc] = strain
-        meta_list = [strain, strain_short, acc, variant_long, variant, date, country, state, authors, title, host,
-                     lat_long]
+        meta_list = [strain, strain_short, acc, variant_long, variant, date, country, state, authors, title, host]
         meta_list = [item.strip() for item in meta_list]
         if variant == "RHDV1":
             RHDV1_meta.write("\t".join(meta_list) + "\n")
@@ -96,6 +87,9 @@ def check_header(header):
     # some of the 'short' strain names have case differences
     header_upper = header_sub.upper()
 
+    if header in strain_list:
+        return(header)
+
     if header_sub in strain_list:
         return(header_sub)
 
@@ -117,13 +111,19 @@ def check_header(header):
 
 with open(fasta_file) as f:
     for record in SeqIO.parse(f, "fasta"):
-        header = record.id.lstrip("O.cun*/").lstrip("L.eur*/").split(" ")[0]
+        header = record.id.replace("O.cun*/", "").replace("O.cun/", "").replace("L.eur*/", "").split(" ")[0]
         proper_header = check_header(header)
         record.id = proper_header
         record.description = proper_header
         # apparently biopython has a module for turning U back to T
         record.seq = record.seq.back_transcribe()
-        variant = strain_to_variant[proper_header]
+        # try and find fasta header in the strain meta-data
+        try:
+            variant = strain_to_variant[proper_header]
+        except:
+            print("Couldn't find fasta header in the meta strain info:")
+            print(header)
+            print(record)
         if variant == "RHDV1":
             SeqIO.write(record, RHDV1_fasta, "fasta")
         elif variant == "RHDV2":

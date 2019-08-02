@@ -17,13 +17,14 @@ meta_files = sys.argv[3:]
 exact_coords = {}
 
 with open(coords_file) as f:
+    next(f)
     for line in f:
         line = line.strip()
         cols = line.split("\t")
-        strain = cols[1]
-        lat = float(cols[2])
+        strain = cols[0].strip()
+        lat = float(cols[1].strip())
         lat_rounded = round(lat, 1)
-        long = float(cols[3])
+        long = float(cols[2].strip())
         long_rounded = round(long, 1)
         exact_coords[strain] = {"lat": lat, "lat_rounded": lat_rounded, "long": long, "long_rounded": long_rounded}
 
@@ -43,6 +44,7 @@ for strain in exact_coords:
         lat_long_place[new_coords] = place
         new_meta[strain] = lat_long_place[new_coords]
 
+
 # write new coords file
 
 for coord in lat_long_place:
@@ -59,6 +61,6 @@ for meta_fl in meta_files:
         for line in fl:
             line = line.strip()
             cols = line.split()
-            strain = cols[0]
+            strain = cols[0].strip()
             place = new_meta[strain]
             new_meta_fl.write(line + "\t" + place + "\n")
