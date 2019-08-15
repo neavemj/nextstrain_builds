@@ -9,7 +9,7 @@ rule all:
 rule files:
     params:
         input_fasta = "data/RHDV_{variant}_{segment}.fasta",
-        input_meta = "data/RHDV_{variant}_{segment}.meta.tsv",
+        input_meta = "data/RHDV_{variant}_{segment}.meta.place.tsv",
         dropped_strains = "config/dropped_strains.txt",
         reference = "config/KT280060_{segment}.gb",
         #colors = "config/colors.tsv",
@@ -71,7 +71,8 @@ rule tree:
         augur tree \
             --alignment {input.alignment} \
             --output {output.tree} \
-            --method {params.method}
+            --method {params.method} \
+            --nthreads 1
         """
 
 rule refine:

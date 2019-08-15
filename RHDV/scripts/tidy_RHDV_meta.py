@@ -24,12 +24,12 @@ RHDV1_fasta = open("RHDV_RHDV1_" + segment + ".fasta", "w")
 RHDV1_meta = open("RHDV_RHDV1_" + segment + ".meta.tsv", "w")
 RHDV2_fasta = open("RHDV_RHDV2_" + segment + ".fasta", "w")
 RHDV2_meta = open("RHDV_RHDV2_" + segment + ".meta.tsv", "w")
-RCV_fasta = open("RHDV_RCV_" + segment + ".fasta", "w")
-RCV_meta = open("RHDV_RCV_" + segment + ".meta.tsv", "w")
+RCV_fasta = open("RHDV_recombinants_" + segment + ".fasta", "w")
+RCV_meta = open("RHDV_recombinants_" + segment + ".meta.tsv", "w")
 
 for f in [RHDV1_meta, RHDV2_meta, RCV_meta]:
     f.write("\t".join(["strain", "strain_short", "accession", "variant_long", "variant", "date", "country", "state", "authors",
-                       "title", "host", "lat_long"]) + "\n")
+                       "title", "host"]) + "\n")
 
 # want an accession to strain dict for the fasta writing
 

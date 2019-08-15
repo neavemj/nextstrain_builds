@@ -44,7 +44,6 @@ for strain in exact_coords:
         lat_long_place[new_coords] = place
         new_meta[strain] = lat_long_place[new_coords]
 
-
 # write new coords file
 
 for coord in lat_long_place:
@@ -56,11 +55,15 @@ for meta_fl in meta_files:
     with open(meta_fl) as fl:
         raw_header = next(fl)
         new_header = raw_header.strip() + "\tplace\n"
-        new_meta_fl = open(meta_fl.lstrip("prelim_"), "w")
+        new_meta_fl = open(meta_fl.rstrip(".meta.tsv") + ".meta.place.tsv", "w")
         new_meta_fl.write(new_header)
         for line in fl:
             line = line.strip()
             cols = line.split()
             strain = cols[0].strip()
-            place = new_meta[strain]
+            try:
+                place = new_meta[strain]
+            except:
+                print("\nWarning: having trouble processing the following meta-data line:")
+                print(line + "\n")
             new_meta_fl.write(line + "\t" + place + "\n")
