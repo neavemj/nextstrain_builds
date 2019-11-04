@@ -1,5 +1,5 @@
 {
-  "title": "Tracking WSSV evolution",
+  "title": "Real-time tracking of influenza A/H9N2 virus evolution",
   "color_options": {
     "num_date": {
       "menuItem": "date",
@@ -7,59 +7,41 @@
       "type": "continuous",
       "key": "date"
     },
+    "host_type": {
+      "key":"host_type",
+      "legendTitle":"host_type",
+      "menuItem":"host_type",
+      "type":"discrete"
+    },
     "country": {
       "key":"country",
-      "legendTitle":"Country",
+      "legendTitle":"country",
       "menuItem":"country",
       "type":"discrete"
     },
-    "source": {
-      "key":"source",
-      "legendTitle":"Source",
-      "menuItem":"source",
-      "type":"discrete"
-    },
-    "host": {
-      "key":"host",
-      "legendTitle":"Host",
-      "menuItem":"host",
-      "type":"discrete"
-    },
-    "specimen": {
-      "key":"specimen",
-      "legendTitle":"Specimen",
-      "menuItem":"specimen",
-      "type":"discrete"
-    },
-    "platform": {
-      "key":"platform",
-      "legendTitle":"Sequencing Platform",
-      "menuItem":"platform",
-      "type":"discrete"
-    },
-    "state": {
-      "key":"state",
-      "legendTitle":"state",
-      "menuItem":"state",
+    "location": {
+      "key":"location",
+      "legendTitle":"location",
+      "menuItem":"location",
       "type":"discrete"
     }
   },
   "geo": [
+    "location",
     "country"
   ],
   "defaults": {
+    "colorBy": "date",
+    "geoResolution": "country",
     "mapTriplicate": true
-  },  
+  },
   "maintainer": [
     "Matthew Neave",
     "mailto:matthew.neave@csiro.au"
   ],
   "filters": [
-    "state",
     "country",
-    "host",
-    "source",
-    "platform",
-    "specimen"
+    "host_type",
+    "location"
   ]
 }
