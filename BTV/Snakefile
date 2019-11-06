@@ -150,7 +150,7 @@ rule traits:
     output:
         node_data = "results/traits_{segment}.json"
     params:
-        columns = "place state"
+        columns = "country state place"
     shell:
         """
         augur traits \
@@ -171,7 +171,7 @@ rule export:
         nt_muts = rules.ancestral.output.node_data,
         aa_muts = rules.translate.output.node_data,
         colors = "config/colors.tsv",
-        lat_longs = "data/place_lat_longs.tsv",
+        lat_longs = "config/country_lat_longs.tsv",
         auspice_config = files.auspice_config
     output:
         auspice_tree = "auspice/btv_segment{segment}_tree.json",
@@ -181,9 +181,9 @@ rule export:
         augur export \
             --tree {input.tree} \
             --metadata {input.metadata} \
-            --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
-            --auspice-config {input.auspice_config} \
+            --node-data {input.branch_lengths} {input.nt_muts} {input.aa_muts} \
             --colors {input.colors} \
+            --auspice-config {input.auspice_config} \
             --lat-longs {input.lat_longs} \
             --output-tree {output.auspice_tree} \
             --output-meta {output.auspice_meta}

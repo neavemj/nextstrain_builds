@@ -1,6 +1,12 @@
 {
   "title": "BTV in Australia",
   "color_options": {
+    "gt": {
+      "menuItem": "genotype",
+      "legendTitle": "Genotype",
+      "type": "discrete",
+      "key": "genotype"
+    },
     "num_date": {
       "menuItem": "date",
       "legendTitle": "Sampling date",
@@ -25,6 +31,12 @@
       "menuItem":"host",
       "type":"discrete"
     },
+    "country": {
+      "key":"country",
+      "legendTitle":"country",
+      "menuItem":"country",
+      "type":"discrete"
+    },
     "state": {
       "key":"state",
       "legendTitle":"state",
@@ -33,12 +45,13 @@
     }
   },
   "geo": [
-    "place",
-    "state"
+    "country",
+    "state",
+    "place"
   ],
   "defaults": {
-    "colorBy": "state",
-    "geoResolution": "place",
+    "colorBy": "country",
+    "geoResolution": "country",
     "mapTriplicate": true
   },
   "maintainer": [
@@ -46,6 +59,7 @@
     "mailto:matthew.neave@csiro.au"
   ],
   "filters": [
+    "country",
     "state",
     "host",
     "authors"
