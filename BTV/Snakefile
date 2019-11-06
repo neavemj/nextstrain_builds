@@ -8,8 +8,8 @@ rule all:
 
 rule files:
     params:
-        input_fasta = "data/btv_segment{segment}_27-02-2019.fasta",
-        input_meta = "data/btv_segment{segment}_27-02-2019_meta.tsv",
+        input_fasta = "data/btv_segment{segment}_06-11-2019.fasta",
+        input_meta = "data/btv_segment{segment}_06-11-2019_meta.tsv",
         dropped_strains = "",
         reference = "config/btv_segment{segment}.gb",
         #colors = "config/colors.tsv",
@@ -53,7 +53,8 @@ rule align:
             --sequences {input.sequences} \
             --reference-sequence {input.reference} \
             --output {output.alignment} \
-            --fill-gaps
+            --fill-gaps \
+            --remove-reference
         """
 
 rule tree:
@@ -63,13 +64,15 @@ rule tree:
     output:
         tree = "results/tree_raw_{segment}.nwk"
     params:
-        method = "iqtree"
+        method = "iqtree",
+        nthreads = 2
     shell:
         """
         augur tree \
             --alignment {input.alignment} \
             --output {output.tree} \
-            --method {params.method}
+            --method {params.method} \
+            --nthreads {params.nthreads}
         """
 
 rule refine:

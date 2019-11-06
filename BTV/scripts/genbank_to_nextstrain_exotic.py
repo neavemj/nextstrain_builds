@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 # Add newly downloaded genbank info from exotic segs to current BTV build
-# also update the lat long file if required
 
 import sys
 import argparse
@@ -36,26 +35,37 @@ def parse_genbank(fl_name):
     seq_record = SeqIO.read(fl_name, "genbank")
     record_dict = {}
 
+    print("\n ***parsing record {}".format(fl_name))
+
     # extracting several bits of information from different parts of the record
     # some are absolutely required for nextstrain others are optional
-    required_qualifiers = ["strain", "segment", "collection_date"]
-    optional_qualifiers = ["host", "serotype", "country", "lat_lon"]
+    required_qualifiers = ["strain", "segment", "collection_date", "country"]
+    optional_qualifiers = ["host", "serotype", "lat_lon"]
 
     for req in required_qualifiers:
         try:
             info = seq_record.features[0].qualifiers[req][0]
             record_dict[req] = info
         except KeyError:
-            print("{} not found in record {}.".format(req, fl_name))
-            print("This is a required field - record aborted. \n")
-            return(None)
+            if req == "strain":
+                try:
+                    info = seq_record.features[0].qualifiers["isolate"][0]
+                    record_dict[req] = info
+                except:
+                    print("{} not found in record {}.".format(req, fl_name))
+                    print("This is a required field - record aborted. \n")
+                    return(None)
+            else:
+                print("{} not found in record {}.".format(req, fl_name))
+                print("This is a required field - record aborted. \n")
+                return(None)
 
     for opt in optional_qualifiers:
         try:
             info = seq_record.features[0].qualifiers[opt][0]
             record_dict[opt] = info
         except KeyError:
-            print("{} not found in record {}.".format(req, fl_name))
+            print("{} not found in record {}.".format(opt, fl_name))
             print("This is optional - record will be written with 'Unknown' in this field. \n")
             record_dict[opt] = "Unknown"
 
@@ -72,10 +82,17 @@ def parse_genbank(fl_name):
 def additional_processing(raw_record_dict):
     if raw_record_dict["country"] != "Unknown":
         country = raw_record_dict["country"].split(":")[0].lower()
-        state = raw_record_dict["country"].split(":")[1].split(",")[1].strip()
-        town = raw_record_dict["country"].split(":")[1].split(",")[0].strip().lower().replace(" ", "_")
+        try:
+            state = raw_record_dict["country"].split(":")[1].split(",")[1].strip()
+        except:
+            state = "Unknown"
+        try:
+            town = raw_record_dict["country"].split(":")[1].split(",")[0].strip().lower().replace(" ", "_")
+        except:
+            town = "Unknown"
     else:
-        state, town = "Unknown"
+        state = "Unknown"
+        town = "Unknown"
 
     raw_record_dict["country"] = country
     raw_record_dict["state"] = state
@@ -91,7 +108,21 @@ def additional_processing(raw_record_dict):
     # https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
     date = raw_record_dict["collection_date"]
     #python_date = datetime.strptime(date, "%b-%Y")
-    python_date = datetime.strptime(date, "%d-%b-%Y")
+
+    try:
+        python_date = datetime.strptime(date, "%d-%b-%Y")
+    except:
+        try:
+            python_date = datetime.strptime(date, "%Y")
+        except:
+            try:
+                python_date = datetime.strptime(date, "%b-%Y")
+            except:    
+                print("can't parse date {}".format(date))
+
+
+
+
     formatted_date = str(python_date.year) + "-" + str(python_date.month) + "-XX"
     raw_record_dict["collection_date"] = formatted_date
 
