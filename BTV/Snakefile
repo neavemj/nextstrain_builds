@@ -65,7 +65,7 @@ rule tree:
         tree = "results/tree_raw_{segment}.nwk"
     params:
         method = "iqtree",
-        nthreads = 2
+        nthreads = 1
     shell:
         """
         augur tree \
